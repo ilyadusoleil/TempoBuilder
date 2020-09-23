@@ -9,8 +9,8 @@ import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
-import Line from '../assets/line.svg';
-const counterArray = Array.from(Array(40).keys());
+
+
 
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -162,11 +162,8 @@ const Metronome = () => {
         tempoTarget={tempoTarget}
         setTempoTarget={setTempoTarget}
       />
-      <div>
-        {counterArray.map((i) => (
-          <Line key={i} id={`L${i}`} />
-        ))}
-      </div>
+
+      <MetronomeBar/>
       <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
     </div>
   );
