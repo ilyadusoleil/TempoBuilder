@@ -1,8 +1,13 @@
 import React from 'react'
 
+import Metronome from '../components/Metronome'
+
 const HomePage = () => {
   return (
-    <h1>HomePage</h1>
+    <div>
+      <h1>Tempo Builder</h1>
+      <Metronome/>
+    </div>
   )
 }
 
