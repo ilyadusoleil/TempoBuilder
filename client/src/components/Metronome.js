@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { css } from '@emotion/core';
+import { gsap } from 'gsap';
 
 import MetronomeWorker from './MetronomeWorker';
 
@@ -8,16 +9,19 @@ import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
+import Line from '../assets/line.svg';
+const counterArray = Array.from(Array(40).keys());
+
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 const Metronome = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  
+
   const [tempoPercent, setTempoPercent] = useState(80);
   const tempoPercentRef = useRef(tempoPercent);
   tempoPercentRef.current = tempoPercent;
-  
+
   const [tempoTarget, setTempoTarget] = useState(120);
   const tempoTargetRef = useRef(tempoTarget);
   tempoTargetRef.current = tempoTarget;
@@ -26,7 +30,43 @@ const Metronome = () => {
   let currentBeat = 0;
   let nextNoteTime = 0;
 
-  const calculateTempo = () => Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
+  const calculateTempo = () =>
+    Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
+
+  const ani = () => {
+    const tempo = calculateTempo();
+    if (isLeft) {
+      for (let i = 0; i < 40; i++) {
+        gsap.fromTo(
+          `#L${i}`,
+          { scaleX: 1 },
+          {
+            scaleX: 3,
+            duration: 60 / tempo / 5,
+            delay: (i - 1) / (tempo * 2),
+            repeat: 1,
+            yoyo: true,
+          }
+        );
+      }
+    } else {
+      for (let i = 39; i >= 0; i--) {
+        gsap.fromTo(
+          `#L${i}`,
+          { scaleX: 1 },
+          {
+            scaleX: 3,
+            duration: 60 / tempo / 5,
+            delay: ((i - 39) * -1) / (tempo * 2),
+            repeat: 1,
+            yoyo: true,
+          }
+        );
+      }
+    }
+
+    isLeft = !isLeft;
+  };
 
   const tick = (beat, time) => {
     if (beat == 0) {
@@ -41,6 +81,8 @@ const Metronome = () => {
 
       osc.start(time);
       osc.stop(time + NOTE_LENGTH);
+
+      ani();
     }
   };
 
@@ -120,7 +162,11 @@ const Metronome = () => {
         tempoTarget={tempoTarget}
         setTempoTarget={setTempoTarget}
       />
-      <MetronomeBar />
+      <div>
+        {counterArray.map((i) => (
+          <Line key={i} id={`L${i}`} />
+        ))}
+      </div>
       <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
     </div>
   );
