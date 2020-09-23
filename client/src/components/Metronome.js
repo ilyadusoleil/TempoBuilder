@@ -5,12 +5,38 @@ import { gsap } from 'gsap';
 import MetronomeWorker from './MetronomeWorker';
 
 import CurrentPlanHeader from './CurrentPlanHeader';
+import SessionsList from './SessionsList'
 import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
 
-
+const piece = {
+  name: 'Arban 1',
+  sections: 4,
+  images: [],
+  plan: [
+    [
+      {letter: 'A', repetitions: 3, percent: 50},
+      {letter: 'B', repetitions: 3, percent: 50}
+    ],
+    [
+      {letter: 'C', repetitions: 3, percent: 50},
+      {letter: 'D', repetitions: 3, percent: 50}
+    ],
+    [
+      {letter: 'A', repetitions: 2, percent: 75},
+      {letter: 'D', repetitions: 2, percent: 80}
+    ],
+    [
+      {letter: 'B', repetitions: 3, percent: 75},
+      {letter: 'C', repetitions: 3, percent: 80},
+    ],
+    [
+      {letter: 'all', repetitions: 2, percent: 100},
+    ],
+  ]
+}
 
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -25,6 +51,8 @@ const Metronome = () => {
   const [tempoTarget, setTempoTarget] = useState(120);
   const tempoTargetRef = useRef(tempoTarget);
   tempoTargetRef.current = tempoTarget;
+
+  const [day, setDay] = useState(2);
 
   let isLeft = true;
   let currentBeat = 0;
@@ -155,7 +183,8 @@ const Metronome = () => {
         align-items: center;
       `}
     >
-      <CurrentPlanHeader name="Arban 1" day="2" />
+      <CurrentPlanHeader name={piece.name} day={day +1} />
+      <SessionsList sessions={piece.plan} currentDay={day} setTempoPercent ={setTempoPercent} setCurrentDay={setDay}/>
       <SetTempo
         tempoPercent={tempoPercent}
         setTempoPercent={setTempoPercent}
