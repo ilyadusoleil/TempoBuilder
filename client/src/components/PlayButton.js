@@ -3,9 +3,7 @@ import React from 'react';
 const PlayButton = ({ isPlaying, handleClick }) => {
   return (
     <button
-      onClick={() => {
-        handleClick((oldState) => !oldState);
-      }}
+      onClick={handleClick}
     >
       {isPlaying ? 'Pause' : 'Play'}
     </button>
