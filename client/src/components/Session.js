@@ -1,13 +1,22 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {css} from '@emotion/core';
 
-const Session = ({sectionLetter, repetitions, percent, onClick, isCurrent}) => {
+import Context, {GetSession} from '../Context'
+
+const Session = ({piece, day, session}) => {
+  const ctx = useContext(Context);
   const bkColor = () => {
-    if (isCurrent) {
+    if (ctx.state.pieces[ctx.state.currentPiece].currentSession == session) {
       return 'peru';
     } else {
       return 'lightgray'
     }
+  }
+
+  const sessionInfo = GetSession(ctx, piece, day, session)
+
+  const handleClick = () => {
+    ctx.dispatch({type: 'updateSession', payload: session})
   }
 
   return (
@@ -20,17 +29,18 @@ const Session = ({sectionLetter, repetitions, percent, onClick, isCurrent}) => {
       background: ${bkColor()};
       cursor: pointer;
 
-    `} onClick={onClick}
+    `}
+     onClick={handleClick}
     >
       <div css={css`
         font-size: 20px;
-      `}>Section {sectionLetter}</div>
+      `}>Section {sessionInfo.letter}</div>
       <div css={css`
         font-size: 25px;
-      `}>x{repetitions}</div>
+      `}>x{sessionInfo.repetitions}</div>
       <div css={css`
         font-size: 15px;
-      `}>{percent}%</div>
+      `}>{sessionInfo.percent}%</div>
 
     </button>
   )

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
-const CurrentPlanHeader = ({ name, day }) => {
+import Context, { GetCurrentPiece } from '../Context';
+
+const CurrentPlanHeader = () => {
+  const ctx = useContext(Context);
+  const currentPiece = GetCurrentPiece(ctx);
   return (
     <div
       css={css`
@@ -9,8 +13,8 @@ const CurrentPlanHeader = ({ name, day }) => {
         justify-content: space-between;
       `}
     >
-      <div>{name}</div>
-      <div>Day {day}</div>
+      <div>{currentPiece.name}</div>
+      <div>Day {currentPiece.currentDay}</div>
     </div>
   );
 };

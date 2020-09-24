@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { css } from '@emotion/core';
 import { gsap } from 'gsap';
 
 import MetronomeWorker from './MetronomeWorker';
 
+import Context from '../Context';
+
 import CurrentPlanHeader from './CurrentPlanHeader';
-import SessionsList from './SessionsList'
+import SessionsList from './SessionsList';
 import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
-
 
 const piece = {
   name: 'Arban 1',
@@ -17,40 +18,38 @@ const piece = {
   images: [],
   plan: [
     [
-      {letter: 'A', repetitions: 3, percent: 50},
-      {letter: 'B', repetitions: 3, percent: 50}
+      { letter: 'A', repetitions: 3, percent: 50 },
+      { letter: 'B', repetitions: 3, percent: 50 },
     ],
     [
-      {letter: 'C', repetitions: 3, percent: 50},
-      {letter: 'D', repetitions: 3, percent: 50}
+      { letter: 'C', repetitions: 3, percent: 50 },
+      { letter: 'D', repetitions: 3, percent: 50 },
     ],
     [
-      {letter: 'A', repetitions: 2, percent: 75},
-      {letter: 'D', repetitions: 2, percent: 80}
+      { letter: 'A', repetitions: 2, percent: 75 },
+      { letter: 'D', repetitions: 2, percent: 80 },
     ],
     [
-      {letter: 'B', repetitions: 3, percent: 75},
-      {letter: 'C', repetitions: 3, percent: 80},
+      { letter: 'B', repetitions: 3, percent: 75 },
+      { letter: 'C', repetitions: 3, percent: 80 },
     ],
-    [
-      {letter: 'all', repetitions: 2, percent: 100},
-    ],
-  ]
-}
+    [{ letter: 'all', repetitions: 2, percent: 100 }],
+  ],
+};
 
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 const Metronome = () => {
+  const ctx = useContext(Context);
+
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [tempoPercent, setTempoPercent] = useState(80);
-  const tempoPercentRef = useRef(tempoPercent);
-  tempoPercentRef.current = tempoPercent;
+  const tempoPercentRef = useRef(ctx.state.tempoPercent);
+  tempoPercentRef.current = ctx.state.tempoPercent;
 
-  const [tempoTarget, setTempoTarget] = useState(120);
-  const tempoTargetRef = useRef(tempoTarget);
-  tempoTargetRef.current = tempoTarget;
+  const tempoTargetRef = useRef(ctx.state.tempoTarget);
+  tempoTargetRef.current = ctx.state.tempoTarget;
 
   const [day, setDay] = useState(2);
 
@@ -183,16 +182,11 @@ const Metronome = () => {
         align-items: center;
       `}
     >
-      <CurrentPlanHeader name={piece.name} day={day +1} />
-      <SessionsList sessions={piece.plan} currentDay={day} setTempoPercent ={setTempoPercent} setCurrentDay={setDay}/>
-      <SetTempo
-        tempoPercent={tempoPercent}
-        setTempoPercent={setTempoPercent}
-        tempoTarget={tempoTarget}
-        setTempoTarget={setTempoTarget}
-      />
+      <CurrentPlanHeader name={piece.name} day={day + 1} />
+      <SessionsList/>
+      <SetTempo />
 
-      <MetronomeBar/>
+      <MetronomeBar />
       <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
     </div>
   );

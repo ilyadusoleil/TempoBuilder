@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { css } from '@emotion/core';
+
+import Context from '../Context'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare as plusIcon, faMinusSquare as minusIcon} from '@fortawesome/free-solid-svg-icons';
 
-const SetNumber = ({ value, setValue, min = 0, max = 200, units }) => {
+/**
+ * value - key of value in context
+ * action - na,e
+ */
+const SetNumber = ({ value, action, units }) => {
+  const ctx = useContext(Context);
+
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   const increment = () => {
-    setValue((oldValue) => (oldValue < max ? oldValue + 1 : oldValue));
+    ctx.dispatch({type: action, payload: 1})
+    // setValue((oldValue) => (oldValue < max ? oldValue + 1 : oldValue));
   };
   const decrement = () => {
-    setValue((oldValue) => (oldValue > min ? oldValue - 1 : oldValue));
+    ctx.dispatch({type: action, payload: -1})
+    // setValue((oldValue) => (oldValue > min ? oldValue - 1 : oldValue));
   };
 
   return (
@@ -78,7 +88,7 @@ const SetNumber = ({ value, setValue, min = 0, max = 200, units }) => {
             font-size: 20px;
           `}
         >
-          {value}
+          {ctx.state[value]}
         </span>
         <span
           css={css`

@@ -3,12 +3,7 @@ import { css } from '@emotion/core';
 
 import SetNumber from './SetNumber';
 
-const SetTempo = ({
-  tempoPercent,
-  setTempoPercent,
-  tempoTarget,
-  setTempoTarget,
-}) => {
+const SetTempo = () => {
   return (
     <div
       css={css`
@@ -17,10 +12,9 @@ const SetTempo = ({
       `}
     >
       <SetNumber
-        value={tempoPercent}
-        setValue={setTempoPercent}
+        action="incTempoPercent"
+        value="tempoPercent"
         units="%"
-        max={100}
       />
       <div
         css={css`
@@ -31,10 +25,9 @@ const SetTempo = ({
         of
       </div>
       <SetNumber
-        value={tempoTarget}
-        setValue={setTempoTarget}
+        action="incTempoTarget"
+        value="tempoTarget"
         units="bpm"
-        max={200}
       />
     </div>
   );
