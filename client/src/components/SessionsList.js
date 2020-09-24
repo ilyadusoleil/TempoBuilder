@@ -3,7 +3,7 @@ import { css } from '@emotion/core';
 
 import Session from './Session';
 
-import Context, {GetCurrentDay, GetCurrentSessionDetails} from '../Context'
+import Context, {GetCurrentDay, GetCurrentSessionDetailsList} from '../Context'
 
 const SessionsList = () => {
   const ctx = useContext(Context);
@@ -26,7 +26,7 @@ const SessionsList = () => {
       `}
     >
       <button onClick={prevDay}>Previous</button>
-      {GetCurrentSessionDetails(ctx).map((session, i) => (
+      {GetCurrentSessionDetailsList(ctx).map((session, i) => (
         <Session
           key={i}
           piece={ctx.state.currentPiece}

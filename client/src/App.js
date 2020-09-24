@@ -1,8 +1,6 @@
 import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
-
-
 import Context, { reducer } from './Context';
 
 import MainPage from './pages/MainPage';
@@ -13,41 +11,44 @@ const App = () => {
     user: {},
     authError: null,
     isLoggedIn: false,
-    displayState: 'form',//'home', //or 'form'
+    displayState: 'home', //'home', //or 'form'
 
     tempoPercentManual: 40, //manual
     tempoTargetManual: 150,
     currentPiece: 0,
-    
+
     pieces: [
-      // {
-      //   name: 'Arban 1',
-      //   tempoTarget: 108,
-      //   currentDay: 2,
-      //   currentSession: 0,
-      //   sections: 4,
-      //   images: [],
-      //   plan: [
-      //     [
-      //       { letter: 'A', repetitions: 3, percent: 50 },
-      //       { letter: 'B', repetitions: 3, percent: 50 },
-      //     ],
-      //     [
-      //       { letter: 'C', repetitions: 3, percent: 50 },
-      //       { letter: 'D', repetitions: 3, percent: 50 },
-      //     ],
-      //     [
-      //       { letter: 'A', repetitions: 2, percent: 75 },
-      //       { letter: 'D', repetitions: 2, percent: 80 },
-      //     ],
-      //     [
-      //       { letter: 'B', repetitions: 3, percent: 75 },
-      //       { letter: 'C', repetitions: 3, percent: 80 },
-      //       { letter: 'D', repetitions: 3, percent: 80 },
-      //     ],
-      //     [{ letter: 'all', repetitions: 2, percent: 100 }],
-      //   ],
-      // },
+      {
+        name: 'Arban 1',
+        tempoTarget: 108,
+        currentDay: 2,
+        currentSession: 0,
+        sections: 4,
+        images: [
+          'https://res.cloudinary.com/dpncc3nbo/image/upload/v1600966631/tempoBuilder/computed-filename-using-request.png',
+          'https://res.cloudinary.com/dpncc3nbo/image/upload/v1600967724/tempoBuilder/computed-filename-using-request.png',
+        ],
+        plan: [
+          [
+            { letter: 'A', repetitions: 3, percent: 50 },
+            { letter: 'B', repetitions: 3, percent: 50 },
+          ],
+          [
+            { letter: 'C', repetitions: 3, percent: 50 },
+            { letter: 'D', repetitions: 3, percent: 50 },
+          ],
+          [
+            { letter: 'A', repetitions: 2, percent: 75 },
+            { letter: 'D', repetitions: 2, percent: 80 },
+          ],
+          [
+            { letter: 'B', repetitions: 3, percent: 75 },
+            { letter: 'C', repetitions: 3, percent: 80 },
+            { letter: 'D', repetitions: 3, percent: 80 },
+          ],
+          [{ letter: 'all', repetitions: 2, percent: 100 }],
+        ],
+      },
       // {
       //   name: 'Charlier 1',
       //   tempoTarget: 120,
@@ -77,7 +78,6 @@ const App = () => {
       //   ],
       // },
     ],
-
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -85,7 +85,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <Context.Provider value={{ state, dispatch }}>
-        <MainPage/>
+        <MainPage />
       </Context.Provider>
     </React.StrictMode>
   );

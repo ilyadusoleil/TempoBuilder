@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 
 import MetronomeWorker from './MetronomeWorker';
 
-import Context from '../Context';
+import Context, { GetCurrentPiece, GetCurrentSessionImageIndex } from '../Context';
 
 import CurrentPlanHeader from './CurrentPlanHeader';
 import SessionsList from './SessionsList';
@@ -12,6 +12,7 @@ import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
+import { SERVER } from '../constants';
 const piece = {
   name: 'Arban 1',
   sections: 4,
@@ -182,7 +183,7 @@ const Metronome = () => {
         align-items: center;
       `}
     >
-      {(ctx.state.pieces && ctx.state.pieces.length > 0) ? (
+      {ctx.state.pieces && ctx.state.pieces.length > 0 ? (
         <div>
           <CurrentPlanHeader name={piece.name} day={day + 1} />
           <SessionsList />
@@ -194,6 +195,17 @@ const Metronome = () => {
 
       <MetronomeBar />
       <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
+
+      {GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && <img src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]} width="50%" alt="Sheet Music!"/>}
+
+      <form
+        action={`${SERVER}/api/images`}
+        method="post"
+        encType="multipart/form-data"
+      >
+        <input type="file" name="image" />
+        <input type="submit" value="Upload" />
+      </form>
     </div>
   );
 };

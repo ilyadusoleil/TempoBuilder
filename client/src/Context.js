@@ -6,10 +6,29 @@ const Context = createContext({});
 const GetCurrentPiece = (ctx) => ctx.state.pieces[ctx.state.currentPiece];
 const GetCurrentDay = (ctx) => GetCurrentPiece(ctx).currentDay;
 const GetCurrentSessionIdx = (ctx) => GetCurrentPiece(ctx).currentSession;
-const GetCurrentSessionDetails = (ctx) =>
+const GetCurrentSessionDetailsList = (ctx) =>
   GetCurrentPiece(ctx).plan[GetCurrentDay(ctx)];
+const GetCurrentSessionDetails = (ctx) =>
+  GetCurrentPiece(ctx).plan[GetCurrentDay(ctx)][GetCurrentSessionIdx(ctx)];
 const GetSession = (ctx, pieceNum, dayNum, sessionNum) =>
   ctx.state.pieces[pieceNum].plan[dayNum][sessionNum];
+
+const GetCurrentSessionImageIndex = (ctx) => {
+  const letter = GetCurrentSessionDetails(ctx).letter.toLowerCase();
+
+  const MAP = {
+    'a': 0,
+    'b': 1,
+    'c': 2,
+    'd': 3,
+  }
+  if (MAP[letter] !== undefined) {
+    return MAP[letter]
+  } else {
+    console.log('unrecognised (inc "all") letter')
+    return -1;
+  }
+}
 
 const getCurrentPieceFromState = (state) => state.pieces[state.currentPiece];
 
@@ -117,7 +136,9 @@ export {
   GetCurrentPiece,
   GetCurrentDay,
   GetCurrentSessionIdx,
+  GetCurrentSessionDetailsList,
   GetCurrentSessionDetails,
+  GetCurrentSessionImageIndex,
   GetSession,
   reducer,
 };
