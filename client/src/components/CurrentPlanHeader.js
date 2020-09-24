@@ -14,7 +14,7 @@ const CurrentPlanHeader = () => {
       `}
     >
       <div>{currentPiece.name}</div>
-      <div>Day {currentPiece.currentDay}</div>
+      <div>Day {currentPiece.currentDay + 1}</div>
     </div>
   );
 };

@@ -66,6 +66,7 @@ const App = () => {
             { letter: 'B', repetitions: 3, percent: 75 },
             { letter: 'C', repetitions: 3, percent: 80 },
           ],
+          [{ letter: 'all', repetitions: 2, percent: 95 }],
           [{ letter: 'all', repetitions: 2, percent: 100 }],
         ],
       },
