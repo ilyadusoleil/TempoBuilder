@@ -7,10 +7,11 @@ import { css } from '@emotion/core';
 import Context, { reducer } from './Context';
 
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
   const initialState = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     tempoPercentManual: 40, //manual
     tempoTargetManual: 150,
     currentPiece: 0,
@@ -78,7 +79,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <Context.Provider value={{ state, dispatch }}>
-        <HomePage />
+        {state.isLoggedIn ? <HomePage /> : <LoginPage />}
       </Context.Provider>
     </React.StrictMode>
   );
