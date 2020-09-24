@@ -182,8 +182,14 @@ const Metronome = () => {
         align-items: center;
       `}
     >
-      <CurrentPlanHeader name={piece.name} day={day + 1} />
-      <SessionsList/>
+      {(ctx.state.pieces && ctx.state.pieces.length > 0) ? (
+        <div>
+          <CurrentPlanHeader name={piece.name} day={day + 1} />
+          <SessionsList />
+        </div>
+      ) : (
+        <div>Create your first practice plan in the menu</div>
+      )}
       <SetTempo />
 
       <MetronomeBar />

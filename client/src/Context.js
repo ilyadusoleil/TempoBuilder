@@ -4,10 +4,10 @@ import _ from 'lodash';
 const Context = createContext({});
 
 const GetCurrentPiece = (ctx) => ctx.state.pieces[ctx.state.currentPiece];
-const GetCurrentDay = (ctx) =>
-  ctx.state.pieces[ctx.state.currentPiece].currentDay;
-const GetCurrentSession = (ctx) =>
-  ctx.state.pieces[ctx.state.currentPiece].currentSession;
+const GetCurrentDay = (ctx) => GetCurrentPiece(ctx).currentDay;
+const GetCurrentSessionIdx = (ctx) => GetCurrentPiece(ctx).currentSession;
+const GetCurrentSessionDetails = (ctx) =>
+  GetCurrentPiece(ctx).plan[GetCurrentDay(ctx)];
 const GetSession = (ctx, pieceNum, dayNum, sessionNum) =>
   ctx.state.pieces[pieceNum].plan[dayNum][sessionNum];
 
@@ -33,6 +33,7 @@ const UpdateSession = (state, val) => {
   return newState;
 };
 
+// FIXME ensure min < max
 const LimitMaxMin = (value, min, max) => {
   if (value > max) return max;
   if (value < min) return min;
@@ -49,7 +50,13 @@ const UpdateCurrentDay = (state, val) => {
 
   return UpdateSession(newState, 0);
 };
-// FIXME ensure min < max
+
+const AddNewPiece = (state, newPiece) => {
+  const newState = _.cloneDeep(state);
+  const newPieceCopy = _.cloneDeep(newPiece);
+  newState.pieces.push(newPieceCopy);
+  return newState;
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -84,15 +91,20 @@ const reducer = (state, action) => {
         currentPiece: LimitMaxMin(action.payload, 0, state.pieces.length - 1),
       });
 
-
     case 'setUser':
-      return Object.assign({}, state, {user: {...action.payload} });
+      return Object.assign({}, state, { user: { ...action.payload } });
     case 'setAuthError':
-      return Object.assign({}, state, {authError: action.payload}); //TODO check this isn't an object
+      return Object.assign({}, state, { authError: action.payload }); //TODO check this isn't an object
     case 'setIsAuthenticated':
-      return Object.assign({}, state, {isAuthenticated: action.payload} );
+      return Object.assign({}, state, { isAuthenticated: action.payload });
     case 'setIsLoggedIn':
-      return Object.assign({}, state, {isLoggedIn: action.payload} );
+      return Object.assign({}, state, { isLoggedIn: action.payload });
+
+    case 'setDisplayState':
+      return Object.assign({}, state, { displayState: action.payload });
+
+    case 'addNewPiece':
+      return AddNewPiece(state, action.payload)
     default:
       console.log('uncaught context state change');
       return state;
@@ -104,7 +116,8 @@ export default Context;
 export {
   GetCurrentPiece,
   GetCurrentDay,
-  GetCurrentSession,
+  GetCurrentSessionIdx,
+  GetCurrentSessionDetails,
   GetSession,
   reducer,
 };

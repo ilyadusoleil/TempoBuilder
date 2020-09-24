@@ -43,16 +43,18 @@ const Header = ({ setIsSideBarOpen }) => {
       >
         Tempo Builder
       </div>
-      <img
-        css={css`
-          margin: ${PIC_MARGIN}px;
-          margin-left: auto;
-          border-radius: ${(HEADER_HEIGHT - PIC_MARGIN * 2) / 2}px;
-        `}
-        alt="profile"
-        src={ctx.state.user.image}
-        height={HEADER_HEIGHT - PIC_MARGIN * 2}
-      />
+      {ctx.state.isAuthenticated && (
+        <img
+          css={css`
+            margin: ${PIC_MARGIN}px;
+            margin-left: auto;
+            border-radius: ${(HEADER_HEIGHT - PIC_MARGIN * 2) / 2}px;
+          `}
+          alt="profile"
+          src={ctx.state.user.image}
+          height={HEADER_HEIGHT - PIC_MARGIN * 2}
+        />
+      )}
     </div>
   );
 };

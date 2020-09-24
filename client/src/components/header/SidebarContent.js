@@ -31,13 +31,20 @@ const SidebarContent = () => {
           key={i}
           name={piece.name}
           progressDays={piece.currentDay + 1}
-          totalDays={piece.plan.length + 1}
+          totalDays={piece.plan.length}
           onClick={() => {
-            console.log('clicky');
-            ctx.dispatch({type: 'updateCurrentPiece', payload: i})
+            ctx.dispatch({ type: 'updateCurrentPiece', payload: i });
           }}
         />
       ))}
+      <button
+        onClick={() => {
+          console.log('form');
+          ctx.dispatch({ type: 'setDisplayState', payload: 'form' });
+        }}
+      >
+        New Piece
+      </button>
     </div>
   );
 };

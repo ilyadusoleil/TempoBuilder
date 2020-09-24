@@ -1,9 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
 import Session from './Session';
 
-import Context from '../Context'
+import Context, {GetCurrentDay, GetCurrentSessionDetails} from '../Context'
 
 const SessionsList = () => {
   const ctx = useContext(Context);
@@ -17,13 +17,6 @@ const SessionsList = () => {
     ctx.dispatch({type: 'nextDay'});
   };
 
-  useEffect(() => {
-    // resetSession(currentDay);
-  }, [])
-
-const getCurrentDay = () => ctx.state.pieces[ctx.state.currentPiece].currentDay;
-
-const getCurrentDaySession = () => ctx.state.pieces[ctx.state.currentPiece].plan[getCurrentDay()]
 
   return (
     <div
@@ -33,11 +26,11 @@ const getCurrentDaySession = () => ctx.state.pieces[ctx.state.currentPiece].plan
       `}
     >
       <button onClick={prevDay}>Previous</button>
-      {getCurrentDaySession().map((session, i) => (
+      {GetCurrentSessionDetails(ctx).map((session, i) => (
         <Session
           key={i}
           piece={ctx.state.currentPiece}
-          day={getCurrentDay()}
+          day={GetCurrentDay(ctx)}
           session={i}
         />
       ))}
@@ -47,13 +40,3 @@ const getCurrentDaySession = () => ctx.state.pieces[ctx.state.currentPiece].plan
 };
 
 export default SessionsList;
-
-
-// sectionLetter={session.letter}
-// repetitions={session.repetitions}
-// percent={session.percent}
-// isCurrent={i === currentSession}
-// onClick={() => {
-//   setTempoPercent(session.percent);
-//   setCurrentSession(i);
-// }}
