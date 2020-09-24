@@ -4,7 +4,7 @@ import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic as music } from '@fortawesome/free-solid-svg-icons';
 
-const SidebarPiece = ({ name, progressDays, totalDays }) => {
+const SidebarPiece = ({ name, progressDays, totalDays, onClick }) => {
   return (
     <div
       css={css`
@@ -16,6 +16,11 @@ const SidebarPiece = ({ name, progressDays, totalDays }) => {
         cursor: pointer;
         display: flex;
       `}
+      onClick={onClick}
+      onKeyDown={onClick}
+      role = "button"
+      tabIndex='0'
+
     >
       <FontAwesomeIcon
         size="1x"

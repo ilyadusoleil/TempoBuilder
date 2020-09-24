@@ -11,6 +11,8 @@ const GetCurrentSession = (ctx) =>
 const GetSession = (ctx, pieceNum, dayNum, sessionNum) =>
   ctx.state.pieces[pieceNum].plan[dayNum][sessionNum];
 
+const getCurrentPieceFromState = (state) => state.pieces[state.currentPiece];
+
 const getCurrentDayFromState = (state) =>
   state.pieces[state.currentPiece].currentDay;
 
@@ -22,27 +24,32 @@ const getCurrentSessionFromState = (state) =>
     getCurrentSessionNumFromState(state)
   ];
 
-  const UpdateSession = (state, val) => {
-    const newState = _.cloneDeep(state);
-    newState.pieces[newState.currentPiece].currentSession = val;
-    newState.tempoPercentManual = getCurrentSessionFromState(newState).percent;
-    newState.tempoTargetManual =
+const UpdateSession = (state, val) => {
+  const newState = _.cloneDeep(state);
+  newState.pieces[newState.currentPiece].currentSession = val;
+  newState.tempoPercentManual = getCurrentSessionFromState(newState).percent;
+  newState.tempoTargetManual =
     newState.pieces[newState.currentPiece].tempoTarget;
-    return newState;
-  };
-  
-  const UpdateCurrentDay = (state, val) => {
-    const newState = _.cloneDeep(state);
-    newState.pieces[newState.currentPiece].currentDay = val;
-    
-    return UpdateSession(newState, 0);
-  };
-// FIXME ensure min < max
+  return newState;
+};
+
 const LimitMaxMin = (value, min, max) => {
   if (value > max) return max;
   if (value < min) return min;
   return value;
 };
+
+const UpdateCurrentDay = (state, val) => {
+  const newState = _.cloneDeep(state);
+  newState.pieces[newState.currentPiece].currentDay = LimitMaxMin(
+    val,
+    0,
+    getCurrentPieceFromState(newState).plan.length - 1
+  );
+
+  return UpdateSession(newState, 0);
+};
+// FIXME ensure min < max
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -72,6 +79,10 @@ const reducer = (state, action) => {
       return UpdateCurrentDay(state, getCurrentDayFromState(state) - 1);
     case 'updateSession':
       return UpdateSession(state, action.payload);
+    case 'updateCurrentPiece':
+      return Object.assign({}, state, {
+        currentPiece: LimitMaxMin(action.payload, 0, state.pieces.length - 1),
+      });
     default:
       console.log('uncaught context state change');
       return state;
