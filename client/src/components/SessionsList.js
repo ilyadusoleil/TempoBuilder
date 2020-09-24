@@ -8,10 +8,6 @@ import Context from '../Context'
 const SessionsList = () => {
   const ctx = useContext(Context);
 
-  // const resetSession = (newCurrentDay) => {
-  //   setCurrentSession(0);
-  //   setTempoPercent(sessions[newCurrentDay][0].percent);
-  // };
 
   const prevDay = () => {
     ctx.dispatch({type: 'previousDay'});

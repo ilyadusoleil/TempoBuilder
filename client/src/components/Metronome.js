@@ -45,11 +45,11 @@ const Metronome = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const tempoPercentRef = useRef(ctx.state.tempoPercent);
-  tempoPercentRef.current = ctx.state.tempoPercent;
+  const tempoPercentRef = useRef(ctx.state.tempoPercentManual);
+  tempoPercentRef.current = ctx.state.tempoPercentManual;
 
-  const tempoTargetRef = useRef(ctx.state.tempoTarget);
-  tempoTargetRef.current = ctx.state.tempoTarget;
+  const tempoTargetRef = useRef(ctx.state.tempoTargetManual);
+  tempoTargetRef.current = ctx.state.tempoTargetManual;
 
   const [day, setDay] = useState(2);
 

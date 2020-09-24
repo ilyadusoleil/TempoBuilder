@@ -12,8 +12,8 @@ const SetTempo = () => {
       `}
     >
       <SetNumber
-        action="incTempoPercent"
-        value="tempoPercent"
+        action="incTempoPercentManual"
+        value="tempoPercentManual"
         units="%"
       />
       <div
@@ -25,8 +25,8 @@ const SetTempo = () => {
         of
       </div>
       <SetNumber
-        action="incTempoTarget"
-        value="tempoTarget"
+        action="incTempoTargetManual"
+        value="tempoTargetManual"
         units="bpm"
       />
     </div>
