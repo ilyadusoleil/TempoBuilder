@@ -1,16 +1,18 @@
-import React, { useReducer } from 'react';
+import React, {  useState, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router } from '@reach/router';
-import { css } from '@emotion/core';
+
 
 import Context, { reducer } from './Context';
 
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
 
 const App = () => {
   const initialState = {
+    isAuthenticated: false,
+    user: {},
+    authError: null,
+
     isLoggedIn: false,
     tempoPercentManual: 40, //manual
     tempoTargetManual: 150,
@@ -79,7 +81,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <Context.Provider value={{ state, dispatch }}>
-        {state.isLoggedIn ? <HomePage /> : <LoginPage />}
+        <MainPage/>
       </Context.Provider>
     </React.StrictMode>
   );

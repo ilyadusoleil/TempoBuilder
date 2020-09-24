@@ -83,6 +83,16 @@ const reducer = (state, action) => {
       return Object.assign({}, state, {
         currentPiece: LimitMaxMin(action.payload, 0, state.pieces.length - 1),
       });
+
+
+    case 'setUser':
+      return Object.assign({}, state, {user: {...action.payload} });
+    case 'setAuthError':
+      return Object.assign({}, state, {authError: action.payload}); //TODO check this isn't an object
+    case 'setIsAuthenticated':
+      return Object.assign({}, state, {isAuthenticated: action.payload} );
+    case 'setIsLoggedIn':
+      return Object.assign({}, state, {isLoggedIn: action.payload} );
     default:
       console.log('uncaught context state change');
       return state;

@@ -31,7 +31,6 @@ const SetNumber = ({ value, action, units }) => {
         align-items: center;
       `}
       onMouseLeave={() => {
-        console.log('leave');
         if (isButtonVisible) {
           setIsButtonVisible(false);
         }

@@ -6,9 +6,9 @@ import Context from '../Context';
 const LoginPage = () => {
   const ctx = useContext(Context);
 
-  const LoginGoogle = () => {
-    console.log('login google hmm');
-  };
+  // const LoginGoogle = () => {
+  //   console.log('login google hmm');
+  // };
 
   return (
     <div
@@ -18,7 +18,7 @@ const LoginPage = () => {
       `}
     >
       <h1>Login</h1>
-      <button onClick={LoginGoogle}>Login with Google</button>
+      <a href="http://localhost:3000/auth/google">Login with goooogle</a>
       <button>Continue as Guest</button>
     </div>
   );
