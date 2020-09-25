@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { css } from '@emotion/core';
 
-import Context, { GetSession, GetCurrentPiece } from '../Context';
+import Context, { GetSession, GetCurrentPiece, GetCurrentSessionIdx } from '../Context';
 
-import {updateCurrentSession} from '../ApiClient';
+import { updateCurrentSession } from '../ApiClient';
 
 const Session = ({ piece, day, session }) => {
   const ctx = useContext(Context);
@@ -19,9 +19,15 @@ const Session = ({ piece, day, session }) => {
 
   const handleClick = () => {
     ctx.dispatch({ type: 'updateSession', payload: session });
-    console.log('click', GetCurrentPiece(ctx))
+    console.log('click', GetCurrentPiece(ctx));
     updateCurrentSession(GetCurrentPiece(ctx)._id, session);
   };
+
+  useEffect(() => { // This updates the tempo-percent/target to be the current session
+    if (session === GetCurrentSessionIdx(ctx)) {
+      ctx.dispatch({ type: 'updateSession', payload: session });
+    }
+  }, []);
 
   return (
     <button
