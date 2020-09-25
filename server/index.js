@@ -44,9 +44,11 @@ app.use(
   })
 );
 
+app.use(express.json());
 
 app.use('/auth', require('./routes/auth'));
 app.use('/api', require('./routes/images'));
+app.use('/piece', require('./routes/pieces'));
 
 const PORT = process.env.PORT || 3000;
 

@@ -1,36 +1,46 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+
+import 'regenerator-runtime/runtime';
+
 import { css } from '@emotion/core';
 import Context from '../../Context';
 import GeneratePlan from './GeneratePlan';
 
+import { SERVER } from '../../constants';
+
 const NewPiece = () => {
   const ctx = useContext(Context);
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {
+
+  const onSubmit = async (data) => {
     const newPiece = {
       name: data.pieceName,
       tempoTarget: data.tempoTarget,
       currentDay: 0,
       currentSession: 0,
-      sections: 4,
+      sectionsCount: data.sectionsCount,
       images: [],
       plan: GeneratePlan(data.sectionsCount),
     };
+
     // Convert data into new piece and add to context
-    console.log(newPiece);
+    console.log('newPiece sending', newPiece);
+
+    fetch(`${SERVER}/piece`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(newPiece),
+    }).then((res) => console.log('returned', res, res.body));
+
     ctx.dispatch({ type: 'addNewPiece', payload: newPiece });
     ctx.dispatch({ type: 'setDisplayState', payload: 'home' });
-    // onSubmit={handleSubmit(onSubmit)}
   };
 
   const onCancel = () => {
     ctx.dispatch({ type: 'setDisplayState', payload: 'home' });
   };
-
-  useEffect(() => {
-    console.log('rargh', errors);
-  }, [errors]);
 
   return (
     <div

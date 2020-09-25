@@ -157,7 +157,7 @@ const Metronome = () => {
       <MetronomeBar />
       <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
 
-      {GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && <img src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]} width="50%" alt="Sheet Music!"/>}
+      {GetCurrentPiece(ctx) && GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && <img src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]} width="50%" alt="Sheet Music!"/>}
 
       <form
         action={`${SERVER}/api/images`}
