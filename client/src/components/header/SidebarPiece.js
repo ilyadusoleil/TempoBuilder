@@ -2,9 +2,20 @@ import React from 'react';
 import { css } from '@emotion/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMusic as music } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMusic as music,
+  faTrash as trash,
+  faEdit as edit,
+} from '@fortawesome/free-solid-svg-icons';
 
-const SidebarPiece = ({ name, progressDays, totalDays, onClick }) => {
+const SidebarPiece = ({
+  name,
+  progressDays,
+  totalDays,
+  onClick,
+  onEdit,
+  onTrash,
+}) => {
   return (
     <div
       css={css`
@@ -16,11 +27,10 @@ const SidebarPiece = ({ name, progressDays, totalDays, onClick }) => {
         cursor: pointer;
         display: flex;
       `}
-      onClick={onClick}
-      onKeyDown={onClick}
-      role = "button"
-      tabIndex='0'
-
+      // onClick={onClick}
+      // onKeyDown={onClick}
+      // role = "button"
+      // tabIndex='0'
     >
       <FontAwesomeIcon
         size="1x"
@@ -29,7 +39,15 @@ const SidebarPiece = ({ name, progressDays, totalDays, onClick }) => {
           margin-right: 10px;
         `}
       />
-      <div>
+      <div
+        css={css`
+          flex-grow: 1;
+        `}
+        onClick={onClick}
+        onKeyDown={onClick}
+        role="button"
+        tabIndex="0"
+      >
         <div
           css={css`
             font-size: 15px;
@@ -48,6 +66,28 @@ const SidebarPiece = ({ name, progressDays, totalDays, onClick }) => {
           Day {progressDays}/{totalDays}
         </div>
       </div>
+      <FontAwesomeIcon
+        size="1x"
+        icon={edit}
+        css={css`
+          margin-right: 10px;
+        `}
+        onClick={onEdit}
+        onKeyDown={onEdit}
+        role="button"
+        tabIndex="0"
+      />
+      <FontAwesomeIcon
+        size="1x"
+        icon={trash}
+        css={css`
+          margin-right: 10px;
+        `}
+        onClick={onTrash}
+        onKeyDown={onTrash}
+        role="button"
+        tabIndex="0"
+      />
     </div>
   );
 };

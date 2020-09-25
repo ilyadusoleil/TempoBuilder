@@ -8,7 +8,8 @@ import Context, {
   GetCurrentPiece,
   GetCurrentSessionDetailsList,
 } from '../Context';
-import { updateCurrentDay,  updateCurrentSession} from '../ApiClient';
+
+import { updateCurrentDay} from '../ApiClient';
 
 const SessionsList = () => {
   const ctx = useContext(Context);
@@ -33,7 +34,6 @@ const SessionsList = () => {
         : currentDay;
     ctx.dispatch({ type: 'updateDay', payload: newCurrentDay });
     updateCurrentDay(GetCurrentPiece(ctx)._id, newCurrentDay);
-    // updateCurrentSession((GetCurrentPiece(ctx)._id, 0));
   };
 
   return (

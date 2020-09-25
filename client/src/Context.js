@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 import _ from 'lodash';
+import { deletePiece } from './ApiClient';
 
 const Context = createContext({});
 
@@ -77,6 +78,24 @@ const AddNewPiece = (state, newPiece) => {
   return newState;
 };
 
+const DeletePiece = (state, deletePieceId) => {
+  const newState = _.cloneDeep(state);
+  const removeIndex = newState.pieces.findIndex(
+    (piece) => piece._id === deletePieceId
+  );
+  if (removeIndex > -1) {
+    newState.pieces.splice(removeIndex, 1);
+  }
+
+  // If removing this index will affect the 'current piece' index, modify this index
+  if (removeIndex === newState.currentPiece) {
+    newState.currentPiece = 0; // reset if selected piece is the one to be removed
+  } else if (removeIndex > newState.currentPiece) {
+    newState.currentPiece -= 1; // Keep the same piece selected if a different piece is being deleted
+  }
+  return newState;
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'incTempoPercentManual':
@@ -126,6 +145,9 @@ const reducer = (state, action) => {
 
     case 'addNewPiece':
       return AddNewPiece(state, action.payload);
+    case 'deletePiece':
+      return DeletePiece(state, action.payload);
+
     default:
       console.log('uncaught context state change');
       return state;

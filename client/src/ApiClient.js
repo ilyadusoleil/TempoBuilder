@@ -1,7 +1,5 @@
 const BASE_URL = 'http://localhost:3000';
 
-
-
 function updateCurrentPiece(newCurrentPieceIdx) {
   const sending = { currentPiece: newCurrentPieceIdx };
   console.log('sending', sending);
@@ -35,7 +33,14 @@ function updateCurrentSession(pieceId, newCurrentSession) {
   });
 }
 
-
+function deletePiece(pieceId) {
+  fetchRequest('/piece', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ id: pieceId }),
+  });
+}
 
 /**
  * Helper function for the fetch request
@@ -56,4 +61,9 @@ function fetchRequest(path, options) {
     );
 }
 
-export { updateCurrentPiece, updateCurrentDay, updateCurrentSession };
+export {
+  updateCurrentPiece,
+  updateCurrentDay,
+  updateCurrentSession,
+  deletePiece,
+};

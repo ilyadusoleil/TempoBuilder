@@ -5,7 +5,7 @@ import Context from '../../Context';
 
 import SidebarPiece from './SidebarPiece';
 
-import { updateCurrentPiece } from '../../ApiClient';
+import { updateCurrentPiece, deletePiece } from '../../ApiClient';
 
 const SidebarContent = () => {
   const ctx = useContext(Context);
@@ -37,6 +37,17 @@ const SidebarContent = () => {
           onClick={() => {
             updateCurrentPiece(i);
             ctx.dispatch({ type: 'updateCurrentPiece', payload: i });
+          }}
+          onEdit={() => {
+            console.log('ediitttt woohoo');
+          }}
+          onTrash={() => {
+            console.log('trash', piece._id);
+
+            ctx.dispatch({ type: 'deletePiece', payload: piece._id });
+            deletePiece(piece._id);
+
+            //TODO if deleting a piece, changes the currentPiece, need to update this index on the server as well.
           }}
         />
       ))}

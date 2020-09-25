@@ -19,6 +19,7 @@ router.post('/', ensureAuth, async (req, res) => {
   }
 });
 
+// TODO change to patch
 router.post('/currentPiece', ensureAuth, async (req, res) => {
   try {
     console.log('Update current Piece', req.body, 'id', req.user.id);
@@ -28,7 +29,7 @@ router.post('/currentPiece', ensureAuth, async (req, res) => {
       { currentPiece: req.body.currentPiece },
       { new: true, useFindAndModify: false }
     );
-    console.log('updated user? ', created)
+    console.log('updated user? ', created);
     res.sendStatus(204);
     // res.send(created);
   } catch (err) {
@@ -36,6 +37,7 @@ router.post('/currentPiece', ensureAuth, async (req, res) => {
   }
 });
 
+// TODO change to patch
 router.post('/currentDay', ensureAuth, async (req, res) => {
   try {
     //req.body.id and req.body.(new)CurrentDay
@@ -52,6 +54,7 @@ router.post('/currentDay', ensureAuth, async (req, res) => {
   }
 });
 
+// TODO change to patch
 router.post('/currentSession', ensureAuth, async (req, res) => {
   try {
     //req.body.id and req.body.(new)CurrentDay
@@ -75,6 +78,30 @@ router.get('/', ensureAuth, async (req, res) => {
       res.status(200);
       res.send(data);
     });
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+//TODO test
+router.put('/', ensureAuth, async (req, res) => {
+  try {
+    console.log('Update (entire) PIECE', req.body.piece);
+
+    await Piece.replaceOne({ _id: req.body.piece.id }, req.body.piece);
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.delete('/', ensureAuth, async (req, res) => {
+  try {
+    console.log('Delete piece', req.body.id);
+
+    await Piece.deleteOne({ _id: req.body.id });
+
+    res.sendStatus(204);
   } catch (err) {
     console.error(err);
   }
