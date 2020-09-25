@@ -36,6 +36,38 @@ router.post('/currentPiece', ensureAuth, async (req, res) => {
   }
 });
 
+router.post('/currentDay', ensureAuth, async (req, res) => {
+  try {
+    //req.body.id and req.body.(new)CurrentDay
+    console.log('Update current Day', req.body, 'id', req.user.id);
+
+    const created = await Piece.findOneAndUpdate(
+      { _id: req.body.id },
+      { currentDay: req.body.currentDay, currentSession: 0 },
+      { new: true, useFindAndModify: false }
+    );
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.post('/currentSession', ensureAuth, async (req, res) => {
+  try {
+    //req.body.id and req.body.(new)CurrentDay
+    console.log('Update current Session', req.body, 'id', req.user.id);
+
+    const created = await Piece.findOneAndUpdate(
+      { _id: req.body.id },
+      { currentSession: req.body.currentSession },
+      { new: true, useFindAndModify: false }
+    );
+    res.sendStatus(204);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 // Get all pieces
 router.get('/', ensureAuth, async (req, res) => {
   try {

@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
-import Context, { GetSession } from '../Context';
+import Context, { GetSession, GetCurrentPiece } from '../Context';
+
+import {updateCurrentSession} from '../ApiClient';
 
 const Session = ({ piece, day, session }) => {
   const ctx = useContext(Context);
@@ -17,6 +19,8 @@ const Session = ({ piece, day, session }) => {
 
   const handleClick = () => {
     ctx.dispatch({ type: 'updateSession', payload: session });
+    console.log('click', GetCurrentPiece(ctx))
+    updateCurrentSession(GetCurrentPiece(ctx)._id, session);
   };
 
   return (

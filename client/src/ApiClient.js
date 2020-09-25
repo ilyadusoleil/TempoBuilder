@@ -13,6 +13,29 @@ function updateCurrentPiece(newCurrentPieceIdx) {
   });
 }
 
+function updateCurrentDay(pieceId, newCurrentDay) {
+  const sending = { id: pieceId, currentDay: newCurrentDay };
+  console.log('sending (day)', sending);
+  fetchRequest('/piece/currentDay', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(sending),
+  });
+}
+
+function updateCurrentSession(pieceId, newCurrentSession) {
+  const sending = { id: pieceId, currentSession: newCurrentSession };
+  console.log('sending (session)', sending);
+  fetchRequest('/piece/currentSession', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(sending),
+  });
+}
+
+
 
 /**
  * Helper function for the fetch request
@@ -33,4 +56,4 @@ function fetchRequest(path, options) {
     );
 }
 
-export { updateCurrentPiece };
+export { updateCurrentPiece, updateCurrentDay, updateCurrentSession };

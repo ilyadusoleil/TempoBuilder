@@ -3,20 +3,38 @@ import { css } from '@emotion/core';
 
 import Session from './Session';
 
-import Context, {GetCurrentDay, GetCurrentSessionDetailsList} from '../Context'
+import Context, {
+  GetCurrentDay,
+  GetCurrentPiece,
+  GetCurrentSessionDetailsList,
+} from '../Context';
+import { updateCurrentDay,  updateCurrentSession} from '../ApiClient';
 
 const SessionsList = () => {
   const ctx = useContext(Context);
 
-
   const prevDay = () => {
-    ctx.dispatch({type: 'previousDay'});
+    const currentDay = GetCurrentDay(ctx);
+    const newCurrentDay = currentDay > 0 ? currentDay - 1 : currentDay;
+
+
+    // ctx.dispatch({type: 'previousDay'});
+    ctx.dispatch({ type: 'updateDay', payload: newCurrentDay });
+    updateCurrentDay(GetCurrentPiece(ctx)._id, newCurrentDay);
+    // updateCurrentSession((GetCurrentPiece(ctx)._id, 0));
   };
 
   const nextDay = () => {
-    ctx.dispatch({type: 'nextDay'});
+    // ctx.dispatch({type: 'nextDay'});
+    const currentDay = GetCurrentDay(ctx);
+    const newCurrentDay =
+      currentDay >= GetCurrentSessionDetailsList(ctx).length - 1
+        ? currentDay + 1
+        : currentDay;
+    ctx.dispatch({ type: 'updateDay', payload: newCurrentDay });
+    updateCurrentDay(GetCurrentPiece(ctx)._id, newCurrentDay);
+    // updateCurrentSession((GetCurrentPiece(ctx)._id, 0));
   };
-
 
   return (
     <div

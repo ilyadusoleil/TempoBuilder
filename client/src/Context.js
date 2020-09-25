@@ -17,18 +17,18 @@ const GetCurrentSessionImageIndex = (ctx) => {
   const letter = GetCurrentSessionDetails(ctx).letter.toLowerCase();
 
   const MAP = {
-    'a': 0,
-    'b': 1,
-    'c': 2,
-    'd': 3,
-  }
+    a: 0,
+    b: 1,
+    c: 2,
+    d: 3,
+  };
   if (MAP[letter] !== undefined) {
-    return MAP[letter]
+    return MAP[letter];
   } else {
-    console.log('unrecognised (inc "all") letter')
+    console.log('unrecognised (inc "all") letter');
     return -1;
   }
-}
+};
 
 const getCurrentPieceFromState = (state) => state.pieces[state.currentPiece];
 
@@ -75,7 +75,7 @@ const AddNewPiece = (state, newPiece) => {
   const newPieceCopy = _.cloneDeep(newPiece);
   newState.pieces.push(newPieceCopy);
   return newState;
-}
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -103,11 +103,13 @@ const reducer = (state, action) => {
     case 'previousDay':
       //Also reset currentSession back to 0
       return UpdateCurrentDay(state, getCurrentDayFromState(state) - 1);
+    case 'updateDay':
+      return UpdateCurrentDay(state, action.payload);
     case 'updateSession':
       return UpdateSession(state, action.payload);
     case 'updateCurrentPiece':
       return Object.assign({}, state, {
-        currentPiece: LimitMaxMin(action.payload, 0, state.pieces.length - 1),
+        currentPiece: action.payload, //LimitMaxMin(action.payload, 0, state.pieces.length - 1),
       });
 
     case 'setUser':
@@ -123,7 +125,7 @@ const reducer = (state, action) => {
       return Object.assign({}, state, { displayState: action.payload });
 
     case 'addNewPiece':
-      return AddNewPiece(state, action.payload)
+      return AddNewPiece(state, action.payload);
     default:
       console.log('uncaught context state change');
       return state;
