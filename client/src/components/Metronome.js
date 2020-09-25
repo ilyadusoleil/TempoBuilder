@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { css } from '@emotion/core';
-import { gsap } from 'gsap';
 
 import MetronomeWorker from './MetronomeWorker';
+import { Animate } from './MetronomeHelper'
 
 import Context, { GetCurrentPiece, GetCurrentSessionImageIndex } from '../Context';
 
@@ -52,49 +52,10 @@ const Metronome = () => {
   const tempoTargetRef = useRef(ctx.state.tempoTargetManual);
   tempoTargetRef.current = ctx.state.tempoTargetManual;
 
-  const [day, setDay] = useState(2);
-
-  let isLeft = true;
   let currentBeat = 0;
-  let nextNoteTime = 0;
 
   const calculateTempo = () =>
     Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
-
-  const ani = () => {
-    const tempo = calculateTempo();
-    if (isLeft) {
-      for (let i = 0; i < 40; i++) {
-        gsap.fromTo(
-          `#L${i}`,
-          { scaleX: 1 },
-          {
-            scaleX: 3,
-            duration: 60 / tempo / 5,
-            delay: (i - 1) / (tempo * 2),
-            repeat: 1,
-            yoyo: true,
-          }
-        );
-      }
-    } else {
-      for (let i = 39; i >= 0; i--) {
-        gsap.fromTo(
-          `#L${i}`,
-          { scaleX: 1 },
-          {
-            scaleX: 3,
-            duration: 60 / tempo / 5,
-            delay: ((i - 39) * -1) / (tempo * 2),
-            repeat: 1,
-            yoyo: true,
-          }
-        );
-      }
-    }
-
-    isLeft = !isLeft;
-  };
 
   const tick = (beat, time) => {
     if (beat == 0) {
@@ -110,7 +71,7 @@ const Metronome = () => {
       osc.start(time);
       osc.stop(time + NOTE_LENGTH);
 
-      ani();
+      Animate(calculateTempo());
     }
   };
 
@@ -124,9 +85,9 @@ const Metronome = () => {
     console.log('currentTempo', currentTempo);
     const beatsPerTick = 60000 / 25 / currentTempo;
     tick(currentBeat, audioContext.currentTime);
-    const SECONDS_IN_MINUTE = 60;
-    const secondsPerBeat = SECONDS_IN_MINUTE / currentTempo;
-    nextNoteTime += secondsPerBeat / beatsPerTick;
+    // const SECONDS_IN_MINUTE = 60;
+    // const secondsPerBeat = SECONDS_IN_MINUTE / currentTempo;
+    // nextNoteTime += secondsPerBeat / beatsPerTick;
 
     currentBeat++;
     if (currentBeat >= beatsPerTick) {
@@ -136,7 +97,7 @@ const Metronome = () => {
 
   const start = () => {
     currentBeat = 0;
-    nextNoteTime = audioContext.currentTime;
+    // nextNoteTime = audioContext.currentTime;
 
     console.log('start');
 
@@ -170,7 +131,7 @@ const Metronome = () => {
 
     return function () {
       timerWorker.postMessage({
-        action: 'STOP', //ACTION_STOP,
+        action: 'STOP',
       });
     };
   }, []);
@@ -185,7 +146,7 @@ const Metronome = () => {
     >
       {ctx.state.pieces && ctx.state.pieces.length > 0 ? (
         <div>
-          <CurrentPlanHeader name={piece.name} day={day + 1} />
+          <CurrentPlanHeader/>
           <SessionsList />
         </div>
       ) : (
