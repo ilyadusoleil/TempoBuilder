@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const PieceSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true 
+    required: true,
   },
   name: {
     type: 'String',
-    required: true 
+    required: true,
   },
   tempoTarget: {
     type: 'Number',
-    required: true 
+    required: true,
   },
   currentDay: {
     type: 'Number',
-    default: 0
+    default: 0,
   },
   currentSession: {
     type: 'Number',
@@ -23,7 +23,7 @@ const PieceSchema = new mongoose.Schema({
   },
   sectionsCount: {
     type: 'Number',
-    required: true
+    required: true,
   },
   images: {
     type: ['String'],

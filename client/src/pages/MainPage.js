@@ -32,6 +32,8 @@ const MainPage = () => {
         ctx.dispatch({type: 'setIsLoggedIn', payload: true});
         // setIsAuthenticated(true);
         ctx.dispatch({type: 'setUser', payload: responseJson.user});
+        console.log('currentpiece: ', responseJson.user.currentPiece)
+        ctx.dispatch({type: 'updateCurrentPiece', payload: responseJson.user.currentPiece})
         // setUser(responseJson.user);
       })
       .catch((error) => {

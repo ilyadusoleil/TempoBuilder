@@ -144,7 +144,7 @@ const Metronome = () => {
         align-items: center;
       `}
     >
-      {ctx.state.pieces && ctx.state.pieces.length > 0 ? (
+      {ctx.state.pieces.length > ctx.state.currentPiece ? (
         <div>
           <CurrentPlanHeader/>
           <SessionsList />

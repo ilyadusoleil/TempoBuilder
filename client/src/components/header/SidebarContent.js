@@ -5,6 +5,8 @@ import Context from '../../Context';
 
 import SidebarPiece from './SidebarPiece';
 
+import { updateCurrentPiece } from '../../ApiClient';
+
 const SidebarContent = () => {
   const ctx = useContext(Context);
 
@@ -33,6 +35,7 @@ const SidebarContent = () => {
           progressDays={piece.currentDay + 1}
           totalDays={piece.plan.length}
           onClick={() => {
+            updateCurrentPiece(i);
             ctx.dispatch({ type: 'updateCurrentPiece', payload: i });
           }}
         />

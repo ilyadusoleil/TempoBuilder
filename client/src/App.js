@@ -7,13 +7,13 @@ import MainPage from './pages/MainPage';
 
 const App = () => {
   const initialState = {
-    isAuthenticated: false,
     user: {},
+    isAuthenticated: false,
     authError: null,
     isLoggedIn: false,
-    displayState: 'home', //'home', //or 'form'
+    displayState: 'home', //'home' or 'form'
 
-    tempoPercentManual: 40, //manual
+    tempoPercentManual: 40,
     tempoTargetManual: 150,
     currentPiece: 0,
 
