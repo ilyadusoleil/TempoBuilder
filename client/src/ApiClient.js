@@ -42,6 +42,17 @@ function deletePiece(pieceId) {
   });
 }
 
+// const file = fileInput.current.files[0];
+function uploadImage(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  return fetchRequest('/api/images', {
+    method: 'POST',
+    body: formData,
+  });
+}
+
 /**
  * Helper function for the fetch request
  *
@@ -66,4 +77,5 @@ export {
   updateCurrentDay,
   updateCurrentSession,
   deletePiece,
+  uploadImage
 };

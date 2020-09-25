@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 import 'regenerator-runtime/runtime';
@@ -9,18 +9,41 @@ import GeneratePlan from './GeneratePlan';
 
 import { SERVER } from '../../constants';
 
+import { uploadImage } from '../../ApiClient';
+
 const NewPiece = () => {
   const ctx = useContext(Context);
+  const [numSections, setNumSections] = useState(3);
   const { register, handleSubmit, errors } = useForm();
 
+  // const fileInput1 = useRef();
+  // const fileInput2 = useRef();
+  // const fileInput3 = useRef();
+  // const fileInput4 = useRef();
+  // const fileInput5 = useRef();
+
+  const [imageArray, setImageArray] = useState(new Array(5));
+
   const onSubmit = async (data) => {
+    console.log('submit');
+
+    // const refs = [fileInput1, fileInput2, fileInput3, fileInput4, fileInput5];
+
+    // let imageArray = new Array(5);
+    // for (let i = 0; i < 5; i++) {
+    //   if (refs[i].current.files[0]) {
+    //     const res = await uploadImage(refs[i].current.files[0]);
+    //     imageArray[i] = res.url;
+    //   }
+    // }
+
     const newPiece = {
       name: data.pieceName,
       tempoTarget: data.tempoTarget,
       currentDay: 0,
       currentSession: 0,
       sectionsCount: data.sectionsCount,
-      images: [],
+      images: imageArray,
       plan: GeneratePlan(data.sectionsCount),
     };
 
@@ -91,7 +114,69 @@ const NewPiece = () => {
           })}
         />
         {errors.tempoTarget && errors.tempoTarget.message}
-        <input
+        <select
+          name="sectionsCount"
+          ref={register({ required: true })}
+          onChange={(e) => {
+            setNumSections(parseInt(e.target.value));
+            console.log('number of sections', e.target.value, numSections);
+          }}
+        >
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        {errors.sectionsCount && errors.sectionsCount.message}
+
+        {Array.from(Array(5).keys()).map((i) => (
+          <div
+            key={i}
+            css={css`
+              display: ${numSections >= i + 1 ? 'inline-block' : 'none'};
+            `}
+          >
+            <div>Section {i + 1}</div>
+            <input
+              // ref={fileInput1}
+              type="file"
+              onChange={(e) => {
+                if (e.target?.files[0]) {
+                  console.log('changed', e.target.files[0]);
+                  uploadImage(e.target.files[0]).then((res) => {
+                    console.log('uploaded', res.url);
+                    setImageArray((oldArray) => {
+                      let output = [...oldArray];
+                      output[i] = res.url;
+                      return output;
+                    });
+                  });
+                }
+              }}
+            />
+            {imageArray[i] && (
+              <img src={imageArray[i]} width="30%" alt="Sheet Music!" />
+            )}
+          </div>
+        ))}
+
+        <button onClick={onCancel}>Cancel</button>
+        <button
+          onClick={() => {
+            console.log(imageArray);
+          }}
+        >
+          showImageState
+        </button>
+        <input type="submit" value="Create" onClick={handleSubmit} />
+      </form>
+    </div>
+  );
+};
+
+export default NewPiece;
+
+{
+  /* <input
           type="number"
           placeholder="Number of Sections"
           name="sectionsCount"
@@ -108,14 +193,5 @@ const NewPiece = () => {
             },
             maxLength: 20,
           })}
-        />
-        {errors.sectionsCount && errors.sectionsCount.message}
-
-        <button onClick={onCancel}>Cancel</button>
-        <input type="submit" value="Create" onClick={handleSubmit} />
-      </form>
-    </div>
-  );
-};
-
-export default NewPiece;
+        /> */
+}

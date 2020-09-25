@@ -2,41 +2,18 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { css } from '@emotion/core';
 
 import MetronomeWorker from './MetronomeWorker';
-import { Animate } from './MetronomeHelper'
+import { Animate } from './MetronomeHelper';
 
-import Context, { GetCurrentPiece, GetCurrentSessionImageIndex } from '../Context';
+import Context, {
+  GetCurrentPiece,
+  GetCurrentSessionImageIndex,
+} from '../Context';
 
 import CurrentPlanHeader from './CurrentPlanHeader';
 import SessionsList from './SessionsList';
 import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
-
-import { SERVER } from '../constants';
-const piece = {
-  name: 'Arban 1',
-  sections: 4,
-  images: [],
-  plan: [
-    [
-      { letter: 'A', repetitions: 3, percent: 50 },
-      { letter: 'B', repetitions: 3, percent: 50 },
-    ],
-    [
-      { letter: 'C', repetitions: 3, percent: 50 },
-      { letter: 'D', repetitions: 3, percent: 50 },
-    ],
-    [
-      { letter: 'A', repetitions: 2, percent: 75 },
-      { letter: 'D', repetitions: 2, percent: 80 },
-    ],
-    [
-      { letter: 'B', repetitions: 3, percent: 75 },
-      { letter: 'C', repetitions: 3, percent: 80 },
-    ],
-    [{ letter: 'all', repetitions: 2, percent: 100 }],
-  ],
-};
 
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -53,6 +30,8 @@ const Metronome = () => {
   tempoTargetRef.current = ctx.state.tempoTargetManual;
 
   let currentBeat = 0;
+
+  const fileInput = useRef();
 
   const calculateTempo = () =>
     Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
@@ -146,7 +125,7 @@ const Metronome = () => {
     >
       {ctx.state.pieces.length > ctx.state.currentPiece ? (
         <div>
-          <CurrentPlanHeader/>
+          <CurrentPlanHeader />
           <SessionsList />
         </div>
       ) : (
@@ -157,16 +136,14 @@ const Metronome = () => {
       <MetronomeBar />
       <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
 
-      {GetCurrentPiece(ctx) && GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && <img src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]} width="50%" alt="Sheet Music!"/>}
-
-      <form
-        action={`${SERVER}/api/images`}
-        method="post"
-        encType="multipart/form-data"
-      >
-        <input type="file" name="image" />
-        <input type="submit" value="Upload" />
-      </form>
+      {GetCurrentPiece(ctx) &&
+        GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && (
+          <img
+            src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]}
+            width="50%"
+            alt="Sheet Music!"
+          />
+        )}
     </div>
   );
 };

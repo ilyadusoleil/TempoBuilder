@@ -11,7 +11,7 @@ const App = () => {
     isAuthenticated: false,
     authError: null,
     isLoggedIn: false,
-    displayState: 'home', //'home' or 'form'
+    displayState: 'form', //'home' or 'form'
 
     tempoPercentManual: 40,
     tempoTargetManual: 150,
