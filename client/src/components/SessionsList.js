@@ -9,7 +9,20 @@ import Context, {
   GetCurrentSessionDetailsList,
 } from '../Context';
 
-import { updateCurrentDay} from '../ApiClient';
+import { updateCurrentDay } from '../ApiClient';
+
+const buttonStyling = css`
+  cursor: pointer;
+  height: 50px;
+  width: 100px;
+  margin: 0px 15px;
+  border: none;
+  border-radius: 10px;
+  background: lightgray;
+  &:hover {
+    background: darkgray;
+  }
+`;
 
 const SessionsList = () => {
   const ctx = useContext(Context);
@@ -17,7 +30,6 @@ const SessionsList = () => {
   const prevDay = () => {
     const currentDay = GetCurrentDay(ctx);
     const newCurrentDay = currentDay > 0 ? currentDay - 1 : currentDay;
-
 
     // ctx.dispatch({type: 'previousDay'});
     ctx.dispatch({ type: 'updateDay', payload: newCurrentDay });
@@ -40,10 +52,24 @@ const SessionsList = () => {
     <div
       css={css`
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: stretch;
       `}
     >
-      <button onClick={prevDay}>Previous</button>
+      <div
+        css={css`
+          display: flex;
+          justify-content: center;
+          margin-bottom: 10px;
+        `}
+      >
+        <button css={buttonStyling} onClick={prevDay}>
+          Previous
+        </button>
+        <button css={buttonStyling} onClick={nextDay}>
+          Next
+        </button>
+      </div>
       {GetCurrentSessionDetailsList(ctx).map((session, i) => (
         <Session
           key={i}
@@ -52,7 +78,6 @@ const SessionsList = () => {
           session={i}
         />
       ))}
-      <button onClick={nextDay}>Next</button>
     </div>
   );
 };

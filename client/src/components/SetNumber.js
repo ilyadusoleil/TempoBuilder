@@ -73,7 +73,7 @@ const SetNumber = ({ value, action, units }) => {
           display: flex;
           align-items: flex-end;
 
-          padding: 30px 0px;
+          padding: 20px 0px;
         `}
         onMouseEnter={() => {
           if (!isButtonVisible) {

@@ -1,7 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { css } from '@emotion/core';
 
-import Context, { GetSession, GetCurrentPiece, GetCurrentSessionIdx } from '../Context';
+import Context, {
+  GetSession,
+  GetCurrentPiece,
+  GetCurrentSessionIdx,
+} from '../Context';
 
 import { updateCurrentSession } from '../ApiClient';
 
@@ -23,7 +27,8 @@ const Session = ({ piece, day, session }) => {
     updateCurrentSession(GetCurrentPiece(ctx)._id, session);
   };
 
-  useEffect(() => { // This updates the tempo-percent/target to be the current session
+  useEffect(() => {
+    // This updates the tempo-percent/target to be the current session
     if (session === GetCurrentSessionIdx(ctx)) {
       ctx.dispatch({ type: 'updateSession', payload: session });
     }
@@ -33,35 +38,27 @@ const Session = ({ piece, day, session }) => {
     <button
       css={css`
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         margin: 10px;
         border: none;
         background: ${bkColor()};
         cursor: pointer;
+
+        border-radius: 5px;
+        padding: 2px 10px;
+        font-size: 20px;
+        height: 40px;
       `}
       onClick={handleClick}
     >
       <div
         css={css`
-          font-size: 20px;
+          
         `}
       >
-        Section {sessionInfo.letter}
-      </div>
-      <div
-        css={css`
-          font-size: 25px;
-        `}
-      >
-        x{sessionInfo.repetitions}
-      </div>
-      <div
-        css={css`
-          font-size: 15px;
-        `}
-      >
-        {sessionInfo.percent}%
+        Section {sessionInfo.letter.toUpperCase()} - {sessionInfo.repetitions} time
+        {sessionInfo.repetitions > 1 ? 's' : ''} at {sessionInfo.percent}% tempo
       </div>
     </button>
   );

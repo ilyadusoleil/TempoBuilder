@@ -11,10 +11,12 @@ const CurrentPlanHeader = () => {
       css={css`
         display: flex;
         justify-content: space-between;
-      `}
+        align-self: flex-end;
+        font-size: 20px;
+        margin-bottom: 20px
+      `}  
     >
-      <div>{currentPiece.name}</div>
-      <div>Day {currentPiece.currentDay + 1}</div>
+      &quot;{currentPiece.name}&quot; - Day {currentPiece.currentDay + 1}
     </div>
   );
 };
