@@ -15,6 +15,8 @@ import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
+import { MEDIA_QUERY_WIDTH } from '../constants'
+
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -119,9 +121,9 @@ const Metronome = () => {
         display: flex;
         align-items: center;
         flex-direction: column;
-        @media (min-width: 1000px) {
+        ${MEDIA_QUERY_WIDTH} {
           flex-direction: row;
-          justify-content: space-around
+          justify-content: space-around;
         }
       `}
     >
