@@ -1,5 +1,6 @@
 const BASE_URL = 'http://localhost:3000';
 
+
 function updateCurrentPiece(newCurrentPieceIdx) {
   const sending = { currentPiece: newCurrentPieceIdx };
   console.log('sending', sending);
@@ -53,6 +54,15 @@ function uploadImage(file) {
   });
 }
 
+function updatePiece(newPiece) {
+  fetchRequest('/piece', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(newPiece),
+  });
+}
+
 /**
  * Helper function for the fetch request
  *
@@ -77,5 +87,6 @@ export {
   updateCurrentDay,
   updateCurrentSession,
   deletePiece,
-  uploadImage
+  uploadImage,
+  updatePiece
 };

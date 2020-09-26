@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import 'regenerator-runtime/runtime';
@@ -9,8 +9,7 @@ import GeneratePlan from './GeneratePlan';
 
 import { SERVER } from '../../constants';
 
-import ImageUploader from './ImageUploader'
-
+import PieceForm from './PieceForm';
 
 const NewPiece = () => {
   const ctx = useContext(Context);
@@ -69,52 +68,14 @@ const NewPiece = () => {
         `}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <input
-          type="text"
-          placeholder="Piece Name"
-          name="pieceName" //Didn't call name so autocomplete is different hmm
-          ref={register({
-            required: 'Required',
-            maxLength: {
-              value: 80,
-              message: 'Too long', // <p>error message</p>
-            },
-          })}
+        <PieceForm
+          register={register}
+          errors={errors}
+          numSections={numSections}
+          setNumSections={setNumSections}
+          imageArray={imageArray}
+          setImageArray={setImageArray}
         />
-        {errors.pieceName && errors.pieceName.message}
-        <input
-          type="number"
-          placeholder="Target Tempo"
-          name="tempoTarget"
-          defaultValue="120"
-          ref={register({
-            required: 'Required',
-            max: {
-              value: 300,
-              message: 'Choose a lower tempo', // <p>error message</p>
-            },
-            min: {
-              value: 30,
-              message: 'Choose a higher tempo', // <p>error message</p>
-            },
-          })}
-        />
-        {errors.tempoTarget && errors.tempoTarget.message}
-        <select
-          name="sectionsCount"
-          ref={register({ required: true })}
-          onChange={(e) => {
-            setNumSections(parseInt(e.target.value));
-            console.log('number of sections', e.target.value, numSections);
-          }}
-        >
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        {errors.sectionsCount && errors.sectionsCount.message}
-
-        <ImageUploader setImageArray={setImageArray} numSections={numSections} imageArray={imageArray}/>
 
         <button onClick={onCancel}>Cancel</button>
         <input type="submit" value="Create" onClick={handleSubmit} />

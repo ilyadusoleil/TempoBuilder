@@ -19,6 +19,21 @@ router.post('/', ensureAuth, async (req, res) => {
   }
 });
 
+router.put('/', ensureAuth, async (req, res) => {
+  try {
+    console.log('edit piece?', req.body);
+
+    req.body.user = req.user.id;
+    const created = await Piece.findOneAndReplace(
+      { _id: req.body._id },
+      req.body
+    );
+    res.send(created);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 // TODO change to patch
 router.post('/currentPiece', ensureAuth, async (req, res) => {
   try {

@@ -96,6 +96,19 @@ const DeletePiece = (state, deletePieceId) => {
   return newState;
 };
 
+const UpdatePiece = (state, updatePiece) => {
+  const newState = _.cloneDeep(state);
+  
+  // find piece with the same _id
+  const pieceIndex = state.pieces.findIndex((piece) => piece._id === updatePiece._id)
+  if (pieceIndex == -1) {
+    console.log('unable to locally update piece');
+    return newState;
+  }
+  newState.pieces[pieceIndex] = updatePiece
+  return newState;
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'incTempoPercentManual':
@@ -143,12 +156,17 @@ const reducer = (state, action) => {
     case 'setDisplayState':
       return Object.assign({}, state, { displayState: action.payload });
     case 'setDisplayStateEdit':
-      return Object.assign({}, state, { displayState: 'edit', editIdx: action.payload });
+      return Object.assign({}, state, {
+        displayState: 'edit',
+        editIdx: action.payload,
+      });
 
     case 'addNewPiece':
       return AddNewPiece(state, action.payload);
     case 'deletePiece':
       return DeletePiece(state, action.payload);
+    case 'updatePiece':
+      return UpdatePiece(state, action.payload);
 
     default:
       console.log('uncaught context state change');
