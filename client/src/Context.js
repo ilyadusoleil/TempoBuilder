@@ -142,6 +142,8 @@ const reducer = (state, action) => {
 
     case 'setDisplayState':
       return Object.assign({}, state, { displayState: action.payload });
+    case 'setDisplayStateEdit':
+      return Object.assign({}, state, { displayState: 'edit', editIdx: action.payload });
 
     case 'addNewPiece':
       return AddNewPiece(state, action.payload);

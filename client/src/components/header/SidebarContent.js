@@ -39,7 +39,7 @@ const SidebarContent = () => {
             ctx.dispatch({ type: 'updateCurrentPiece', payload: i });
           }}
           onEdit={() => {
-            console.log('ediitttt woohoo');
+            ctx.dispatch({type: 'setDisplayStateEdit', payload: i}); // TODO consider updating payload to _id instead
           }}
           onTrash={() => {
             console.log('trash', piece._id);

@@ -11,6 +11,7 @@ import SidebarContent from '../components/header/SidebarContent';
 import Metronome from '../components/Metronome';
 
 import NewPlan from '../components/form/NewPiece';
+import EditPlan from '../components/form/EditPiece';
 
 import { SERVER } from '../constants';
 
@@ -38,9 +39,9 @@ const HomePage = () => {
       .then((res) => (res.status != 204 ? res.json() : res))
       .then((res) => {
         console.log('returned', res);
-        res.forEach(piece => {
+        res.forEach((piece) => {
           ctx.dispatch({ type: 'addNewPiece', payload: piece });
-        })
+        });
       });
   }, []);
 
@@ -53,7 +54,9 @@ const HomePage = () => {
         styles={{ sidebar: { background: 'white' } }}
       >
         <Header setIsSideBarOpen={setIsSideBarOpen} />
-        {ctx.state.displayState === 'form' ? <NewPlan /> : <Metronome />}
+        {ctx.state.displayState === 'form' && <NewPlan />}
+        {ctx.state.displayState === 'edit' && <EditPlan />}
+        {ctx.state.displayState === 'home' && <Metronome />}
       </Sidebar>
     </div>
   );
