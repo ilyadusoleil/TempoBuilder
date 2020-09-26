@@ -31,8 +31,6 @@ const Metronome = () => {
 
   let currentBeat = 0;
 
-  const fileInput = useRef();
-
   const calculateTempo = () =>
     Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
 
@@ -119,23 +117,34 @@ const Metronome = () => {
     <div
       css={css`
         display: flex;
-        flex-direction: column;
         align-items: center;
+        flex-direction: column;
+        @media (min-width: 1000px) {
+          flex-direction: row;
+          justify-content: space-around
+        }
       `}
     >
-      {ctx.state.pieces.length > ctx.state.currentPiece ? (
-        <div>
-          <CurrentPlanHeader />
-          <SessionsList />
-        </div>
-      ) : (
-        <div>Create your first practice plan in the menu</div>
-      )}
-      <SetTempo />
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        `}
+      >
+        {ctx.state.pieces.length > ctx.state.currentPiece ? (
+          <div>
+            <CurrentPlanHeader />
+            <SessionsList />
+          </div>
+        ) : (
+          <div>Create your first practice plan in the menu</div>
+        )}
+        <SetTempo />
 
-      <MetronomeBar />
-      <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
-
+        <MetronomeBar />
+        <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
+      </div>
       {GetCurrentPiece(ctx) &&
         GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && (
           <img
