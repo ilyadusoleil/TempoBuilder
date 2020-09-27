@@ -15,6 +15,8 @@ import EditPlan from '../components/form/EditPiece';
 
 import { SERVER } from '../constants';
 
+import { background, NightModeTransitionTime } from '../colors'
+
 const HomePage = () => {
   // const { isLoading, error, data } = useQuery('repoData', () =>
   //   fetch(
@@ -51,7 +53,7 @@ const HomePage = () => {
         sidebar={SidebarContent()}
         open={isSideBarOpen}
         onSetOpen={setIsSideBarOpen}
-        styles={{ sidebar: { background: 'white' } }}
+        styles={{ sidebar: { background: 'white' }, content: {background: background(ctx), transition: NightModeTransitionTime} }}
       >
         <Header setIsSideBarOpen={setIsSideBarOpen} />
         {ctx.state.displayState === 'form' && <NewPlan />}

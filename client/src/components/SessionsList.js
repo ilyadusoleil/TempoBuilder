@@ -10,17 +10,19 @@ import Context, {
 } from '../Context';
 
 import { updateCurrentDay } from '../ApiClient';
+import { primary, secondary, text } from '../colors';
 
-const buttonStyling = css`
+const buttonStyling = (ctx) => css`
   cursor: pointer;
   height: 50px;
   width: 100px;
   margin: 0px 15px;
   border: none;
   border-radius: 10px;
-  background: lightgray;
+  background: ${primary(ctx)};
+  color: ${text(ctx)};
   &:hover {
-    background: darkgray;
+    background: ${secondary(ctx)};
   }
 `;
 
@@ -63,10 +65,10 @@ const SessionsList = () => {
           margin-bottom: 10px;
         `}
       >
-        <button css={buttonStyling} onClick={prevDay}>
+        <button css={buttonStyling(ctx)} onClick={prevDay}>
           Previous
         </button>
-        <button css={buttonStyling} onClick={nextDay}>
+        <button css={buttonStyling(ctx)} onClick={nextDay}>
           Next
         </button>
       </div>

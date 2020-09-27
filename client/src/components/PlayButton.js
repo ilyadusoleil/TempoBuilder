@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {css} from '@emotion/core'
+
+import Context from '../Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-icons'
+import { primary, secondary, text } from '../colors';
 
 const PlayButton = ({ isPlaying, handleClick }) => {
+  const ctx = useContext(Context);
   return (
     <button
     css={css`
       border: none;
-      background: white;
       margin-top: -30px;
+      background: #00000000;
       cursor: pointer;
       &:hover {
         transform: scale(1.3);
@@ -18,7 +22,7 @@ const PlayButton = ({ isPlaying, handleClick }) => {
     `}
       onClick={handleClick}
     >
-      <FontAwesomeIcon color='#505050' size='4x' icon={isPlaying ? faStopCircle : faPlayCircle} />
+      <FontAwesomeIcon color={text(ctx)} size='4x' icon={isPlaying ? faStopCircle : faPlayCircle} />
     </button>
   );
 };

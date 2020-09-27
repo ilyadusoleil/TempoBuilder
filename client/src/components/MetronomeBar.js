@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {css} from '@emotion/core';
 import Line from '../assets/line.svg';
+
+import Context from '../Context';
 
 const LINE_COUNT = 40;
 const counterArray = Array.from(Array(LINE_COUNT).keys());
 
+import { text } from '../colors';
+
 const MetronomeBar = () => {
+  const ctx = useContext(Context)
   const calcLineHeight = (index) => {
     const MAX_HEIGHT = 80;
     const MIN_HEIGHT = 30;
@@ -25,7 +30,7 @@ const MetronomeBar = () => {
       margin-top: 15px;
     `}>
       {counterArray.map((i) => (
-        <Line height={calcLineHeight(i)} width="10px" key={i} id={`L${i}`} />
+        <Line stroke={text(ctx)} height={calcLineHeight(i)} width="10px" key={i} id={`L${i}`} />
       ))}
     </div>
   );

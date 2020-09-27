@@ -15,7 +15,8 @@ import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
-import { MEDIA_QUERY_WIDTH } from '../constants'
+import { MEDIA_QUERY_WIDTH } from '../constants';
+import { background, NightModeTransitionTime } from '../colors';
 
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -121,6 +122,9 @@ const Metronome = () => {
         display: flex;
         align-items: center;
         flex-direction: column;
+        padding-top: 20px;
+        background: ${background(ctx)};
+        transition: ${NightModeTransitionTime};
         ${MEDIA_QUERY_WIDTH} {
           flex-direction: row;
           justify-content: space-around;
@@ -153,6 +157,10 @@ const Metronome = () => {
             src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]}
             width="50%"
             alt="Sheet Music!"
+            css={css`
+              filter: invert(${ctx.state.isNightMode ? 1 : 0});
+              transition: filter ${NightModeTransitionTime};
+            `}
           />
         )}
     </div>

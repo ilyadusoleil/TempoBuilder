@@ -8,14 +8,15 @@ import Context, {
 } from '../Context';
 
 import { updateCurrentSession } from '../ApiClient';
+import { primary, secondary, text } from '../colors';
 
 const Session = ({ piece, day, session }) => {
   const ctx = useContext(Context);
   const bkColor = () => {
     if (ctx.state.pieces[ctx.state.currentPiece].currentSession == session) {
-      return 'peru';
+      return secondary(ctx);
     } else {
-      return 'lightgray';
+      return primary(ctx);
     }
   };
 
@@ -49,17 +50,14 @@ const Session = ({ piece, day, session }) => {
         padding: 2px 10px;
         font-size: 20px;
         height: 40px;
+        color: ${text(ctx)}
       `}
       onClick={handleClick}
     >
-      <div
-        css={css`
-          
-        `}
-      >
+
         Section {sessionInfo.letter.toUpperCase()} - {sessionInfo.repetitions} time
         {sessionInfo.repetitions > 1 ? 's' : ''} at {sessionInfo.percent}% tempo
-      </div>
+
     </button>
   );
 };

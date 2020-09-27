@@ -14,6 +14,8 @@ const App = () => {
     displayState: 'home', //'home' or 'form' or 'edit'
     editIdx: 0,
 
+    isNightMode: false,
+
     tempoPercentManual: 40,
     tempoTargetManual: 150,
     currentPiece: 0,
@@ -86,9 +88,9 @@ const App = () => {
   return (
     <React.StrictMode>
       {/* <ReactQueryCacheProvider queryCache={queryCache}> */}
-        <Context.Provider value={{ state, dispatch }}>
-          <MainPage />
-        </Context.Provider>
+      <Context.Provider value={{ state, dispatch }}>
+        <MainPage />
+      </Context.Provider>
       {/* </ReactQueryCacheProvider> */}
     </React.StrictMode>
   );

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
 import Context, { GetCurrentPiece } from '../Context';
+import { text } from '../colors';
 
 const CurrentPlanHeader = () => {
   const ctx = useContext(Context);
@@ -13,8 +14,9 @@ const CurrentPlanHeader = () => {
         justify-content: space-between;
         align-self: flex-end;
         font-size: 20px;
-        margin-bottom: 20px
-      `}  
+        margin-bottom: 20px;
+        color: ${text(ctx)};
+      `}
     >
       &quot;{currentPiece.name}&quot; - Day {currentPiece.currentDay + 1}
     </div>

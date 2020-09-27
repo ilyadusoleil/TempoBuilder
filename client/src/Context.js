@@ -98,16 +98,18 @@ const DeletePiece = (state, deletePieceId) => {
 
 const UpdatePiece = (state, updatePiece) => {
   const newState = _.cloneDeep(state);
-  
+
   // find piece with the same _id
-  const pieceIndex = state.pieces.findIndex((piece) => piece._id === updatePiece._id)
+  const pieceIndex = state.pieces.findIndex(
+    (piece) => piece._id === updatePiece._id
+  );
   if (pieceIndex == -1) {
     console.log('unable to locally update piece');
     return newState;
   }
-  newState.pieces[pieceIndex] = updatePiece
+  newState.pieces[pieceIndex] = updatePiece;
   return newState;
-}
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -167,6 +169,9 @@ const reducer = (state, action) => {
       return DeletePiece(state, action.payload);
     case 'updatePiece':
       return UpdatePiece(state, action.payload);
+
+    case 'toggleNightMode':
+      return Object.assign({}, state, { isNightMode: !state.isNightMode });
 
     default:
       console.log('uncaught context state change');

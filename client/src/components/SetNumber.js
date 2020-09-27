@@ -5,7 +5,7 @@ import Context from '../Context'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare as plusIcon, faMinusSquare as minusIcon} from '@fortawesome/free-solid-svg-icons';
-
+import { primary, secondary, text } from '../colors';
 /**
  * value - key of value in context
  * action - na,e
@@ -51,6 +51,7 @@ const SetNumber = ({ value, action, units }) => {
               transform: scale(1.1);
             }
           `}
+          color={text(ctx)}
           size="2x"
           onClick={increment}
           icon={plusIcon}
@@ -63,6 +64,7 @@ const SetNumber = ({ value, action, units }) => {
             }
           `}
           size="2x"
+          color={text(ctx)}
           onClick={decrement}
           icon={minusIcon}
         />
@@ -72,7 +74,7 @@ const SetNumber = ({ value, action, units }) => {
         css={css`
           display: flex;
           align-items: flex-end;
-
+          color: ${text(ctx)};
           padding: 20px 0px;
         `}
         onMouseEnter={() => {
