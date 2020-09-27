@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { css } from '@emotion/core';
+
+import Context from '../../Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -7,6 +9,9 @@ import {
   faTrash as trash,
   faEdit as edit,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { primary, text } from '../../colors';
+import { sidebarButtonStyle } from './SidebarStyles';
 
 const SidebarPiece = ({
   name,
@@ -16,25 +21,18 @@ const SidebarPiece = ({
   onEdit,
   onTrash,
 }) => {
+  const ctx = useContext(Context);
+
   return (
     <div
       css={css`
-        margin: 10px 0px;
-        &:hover {
-          background: lightGray;
-        }
-        padding-left: 5px;
-        cursor: pointer;
-        display: flex;
+        ${sidebarButtonStyle(ctx)}
       `}
-      // onClick={onClick}
-      // onKeyDown={onClick}
-      // role = "button"
-      // tabIndex='0'
     >
       <FontAwesomeIcon
         size="1x"
         icon={music}
+        color={text(ctx)}
         css={css`
           margin-right: 10px;
         `}
@@ -52,6 +50,7 @@ const SidebarPiece = ({
           css={css`
             font-size: 15px;
             margin-bottom: 3px;
+            color: ${text(ctx)}
           `}
         >
           {name}
@@ -60,7 +59,7 @@ const SidebarPiece = ({
           css={css`
             font-size: 12px;
             margin-left: 10px;
-            color: darkgray;
+            color: ${primary(ctx)}
           `}
         >
           Day {progressDays}/{totalDays}
@@ -76,6 +75,7 @@ const SidebarPiece = ({
         onKeyDown={onEdit}
         role="button"
         tabIndex="0"
+        color={text(ctx)}
       />
       <FontAwesomeIcon
         size="1x"
@@ -87,6 +87,7 @@ const SidebarPiece = ({
         onKeyDown={onTrash}
         role="button"
         tabIndex="0"
+        color={text(ctx)}
       />
     </div>
   );

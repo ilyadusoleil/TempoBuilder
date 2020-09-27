@@ -4,11 +4,26 @@ import { css } from '@emotion/core';
 import Context from '../../Context';
 
 import SidebarPiece from './SidebarPiece';
+import SidebarButton from './SidebarButton';
 
 import { updateCurrentPiece, deletePiece } from '../../ApiClient';
 
+import { background, text } from '../../colors';
+
+
 const SidebarContent = () => {
   const ctx = useContext(Context);
+
+  const handleNewPiece = () => {
+    console.log('form');
+    ctx.dispatch({ type: 'setDisplayState', payload: 'form' });
+  };
+
+  const handleLogout = () => {
+    console.log('log out');
+    window.open('http://localhost:3000/auth/logout', '_self');
+    ctx.dispatch({ type: 'logout' });
+  };
 
   return (
     <div
@@ -16,17 +31,21 @@ const SidebarContent = () => {
         width: 200px;
         display: flex;
         flex-direction: column;
-        padding: 20px;
+        padding: 0px 20px;
+        background: ${background(ctx)};
+        height: 100vh;
       `}
     >
       <div
         css={css`
           font-size: 25px;
           margin: 20px;
+          margin-top: 30px;
           align-self: center;
+          color: ${text(ctx)};
         `}
       >
-        Hi Hamish
+        Hi {ctx.state.user?.firstName}
       </div>
       {ctx.state.pieces.map((piece, i) => (
         <SidebarPiece
@@ -51,27 +70,19 @@ const SidebarContent = () => {
           }}
         />
       ))}
-      <button
-        onClick={() => {
-          console.log('form');
-          ctx.dispatch({ type: 'setDisplayState', payload: 'form' });
-        }}
-      >
-        New Piece
-      </button>
-      <button
+      <div
         css={css`
-          margin: 20px;
-          margin-bottom: auto;
+          margin-top: auto;
+          margin-bottom: 30px;
+
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
         `}
-        onClick={() => {
-          console.log('log out');
-          window.open('http://localhost:3000/auth/logout', '_self');
-          ctx.dispatch({type: 'logout'})
-        }}
       >
-        Log Out
-      </button>
+        <SidebarButton onClick={handleNewPiece} text="New Piece" />
+        <SidebarButton onClick={handleLogout} text="Logout" />
+      </div>
     </div>
   );
 };
