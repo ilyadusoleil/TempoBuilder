@@ -39,7 +39,7 @@ const SidebarContent = () => {
             ctx.dispatch({ type: 'updateCurrentPiece', payload: i });
           }}
           onEdit={() => {
-            ctx.dispatch({type: 'setDisplayStateEdit', payload: i}); // TODO consider updating payload to _id instead
+            ctx.dispatch({ type: 'setDisplayStateEdit', payload: i }); // TODO consider updating payload to _id instead
           }}
           onTrash={() => {
             console.log('trash', piece._id);
@@ -58,6 +58,19 @@ const SidebarContent = () => {
         }}
       >
         New Piece
+      </button>
+      <button
+        css={css`
+          margin: 20px;
+          margin-bottom: auto;
+        `}
+        onClick={() => {
+          console.log('log out');
+          window.open('http://localhost:3000/auth/logout', '_self');
+          ctx.dispatch({type: 'logout'})
+        }}
+      >
+        Log Out
       </button>
     </div>
   );

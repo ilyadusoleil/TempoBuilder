@@ -154,6 +154,14 @@ const reducer = (state, action) => {
       return Object.assign({}, state, { isAuthenticated: action.payload });
     case 'setIsLoggedIn':
       return Object.assign({}, state, { isLoggedIn: action.payload });
+    case 'logout':
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+        isAuthenticated: false,
+        user: {},
+        displayState: 'home',
+        authError: null,
+      });
 
     case 'setDisplayState':
       return Object.assign({}, state, { displayState: action.payload });
