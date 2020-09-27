@@ -28,7 +28,7 @@ const EditPiece = () => {
     // Convert data into new piece and add to context
     console.log('submit', newPiece);
 
-    ctx.dispatch({ type: 'updatePiece', payload: newPiece})
+    ctx.dispatch({ type: 'updatePiece', payload: newPiece });
     ctx.dispatch({ type: 'setDisplayState', payload: 'home' });
     updatePiece(newPiece);
   };
@@ -57,7 +57,18 @@ const EditPiece = () => {
           setImageArray={setImageArray}
           pieceInfo={editPiece}
         />
-
+        <div>Plan Details</div>
+        {editPiece.plan.map((day, i) => (
+          <div key={i}>
+            <div>Day {i + 1}</div>
+            {day.map((session, i) => (
+              <div key={i}>
+                Session {i + 1}: Section {session.letter}, x
+                {session.repetitions} at {session.percent}%
+              </div>
+            ))}
+          </div>
+        ))}
         <button onClick={onCancel}>Cancel</button>
         <input type="submit" value="Create" onClick={handleSubmit} />
       </form>
