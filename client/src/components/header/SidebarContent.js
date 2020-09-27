@@ -11,16 +11,18 @@ import { updateCurrentPiece, deletePiece } from '../../ApiClient';
 import { background, text } from '../../colors';
 
 
-const SidebarContent = () => {
+const SidebarContent = (setIsSideBarOpen) => {
   const ctx = useContext(Context);
 
   const handleNewPiece = () => {
     console.log('form');
+    setIsSideBarOpen(false);
     ctx.dispatch({ type: 'setDisplayState', payload: 'form' });
   };
 
   const handleLogout = () => {
     console.log('log out');
+    setIsSideBarOpen(false);
     window.open('http://localhost:3000/auth/logout', '_self');
     ctx.dispatch({ type: 'logout' });
   };
@@ -54,10 +56,12 @@ const SidebarContent = () => {
           progressDays={piece.currentDay + 1}
           totalDays={piece.plan.length}
           onClick={() => {
+            setIsSideBarOpen(false);
             updateCurrentPiece(i);
             ctx.dispatch({ type: 'updateCurrentPiece', payload: i });
           }}
           onEdit={() => {
+            setIsSideBarOpen(false);
             ctx.dispatch({ type: 'setDisplayStateEdit', payload: i }); // TODO consider updating payload to _id instead
           }}
           onTrash={() => {

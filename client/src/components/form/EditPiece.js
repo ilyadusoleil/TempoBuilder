@@ -70,7 +70,7 @@ const EditPiece = () => {
           </div>
         ))}
         <button onClick={onCancel}>Cancel</button>
-        <input type="submit" value="Create" onClick={handleSubmit} />
+        <input type="submit" value="Update" onClick={handleSubmit} />
       </form>
     </div>
   );

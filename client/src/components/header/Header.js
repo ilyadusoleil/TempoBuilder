@@ -5,7 +5,7 @@ import Context from '../../Context';
 import { HEADER_HEIGHT } from '../../constants';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faHome, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 import { header, primary, text } from '../../colors';
 
@@ -32,10 +32,14 @@ const Header = ({ setIsSideBarOpen }) => {
             transform: scale(1.3);
           }
         `}
-        onClick={() => setIsSideBarOpen(true)}
+        onClick={() =>
+          ctx.state.displayState === 'home'
+            ? setIsSideBarOpen(true)
+            : ctx.dispatch({ type: 'setDisplayState', payload: 'home' })
+        }
         color={text(ctx)}
         size="1x"
-        icon={faBars}
+        icon={ctx.state.displayState === 'home' ? faBars : faHome}
       />
       <div
         css={css`
