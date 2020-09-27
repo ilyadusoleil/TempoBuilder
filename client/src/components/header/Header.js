@@ -7,7 +7,7 @@ import { HEADER_HEIGHT } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMoon } from '@fortawesome/free-solid-svg-icons';
 
-import { background, primary, text } from '../../colors';
+import { header, primary, text } from '../../colors';
 
 const PIC_MARGIN = 10;
 
@@ -17,7 +17,7 @@ const Header = ({ setIsSideBarOpen }) => {
     <div
       css={css`
         display: flex;
-        background: ${background(ctx)};
+        background: ${header(ctx)};
         border-style: none none solid none;
         border-color: ${primary(ctx)};
         height: ${HEADER_HEIGHT}px;
