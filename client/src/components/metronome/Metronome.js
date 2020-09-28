@@ -19,7 +19,6 @@ import { MEDIA_QUERY_WIDTH } from '../../constants';
 import { background, NightModeTransitionTime } from '../../colors';
 
 let timerWorker = new Worker(MetronomeWorker);
-let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 const Metronome = () => {
   const ctx = useContext(Context);
@@ -33,6 +32,7 @@ const Metronome = () => {
   tempoTargetRef.current = ctx.state.tempoTargetManual;
 
   let currentBeat = 0;
+  let audioContext = null;
 
   const calculateTempo = () =>
     Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
@@ -65,6 +65,8 @@ const Metronome = () => {
   };
 
   const start = () => {
+    if (!audioContext)
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
     currentBeat = 0;
     timerWorker.postMessage({
       action: 'START',
@@ -123,7 +125,7 @@ const Metronome = () => {
           flex-direction: column;
           align-items: center;
           padding: 30px;
-          padding-top: 0px
+          padding-top: 0px;
         `}
       >
         {ctx.state.pieces.length > ctx.state.currentPiece ? (
@@ -139,39 +141,45 @@ const Metronome = () => {
         <MetronomeBar />
         <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
       </div>
-      <div css={css`
-      flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-      `}>
+      <div
+        css={css`
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+        `}
+      >
         {GetCurrentPiece(ctx) &&
-        GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && (
-          <img
-            src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]}
-            width="100%"
-            alt="Sheet Music!"
-            css={css`
-              filter: invert(${ctx.state.isNightMode ? 1 : 0});
-              transition: filter ${NightModeTransitionTime};
-            `}
-          />
-        )}
-      {GetCurrentPiece(ctx) &&
-        GetCurrentSessionImageIndex(ctx) === -1 &&
-        GetCurrentPiece(ctx).images.map((image, i) => (
-          image && <img
-            key={i}
-            src={image}
-            width="100%"
-            alt="Sheet Music!"
-            css={css`
-              filter: invert(${ctx.state.isNightMode ? 1 : 0});
-              transition: filter ${NightModeTransitionTime};
-            `}
-          />
-        ))}
+          GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && (
+            <img
+              src={
+                GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]
+              }
+              width="100%"
+              alt="Sheet Music!"
+              css={css`
+                filter: invert(${ctx.state.isNightMode ? 1 : 0});
+                transition: filter ${NightModeTransitionTime};
+              `}
+            />
+          )}
+        {GetCurrentPiece(ctx) &&
+          GetCurrentSessionImageIndex(ctx) === -1 &&
+          GetCurrentPiece(ctx).images.map(
+            (image, i) =>
+              image && (
+                <img
+                  key={i}
+                  src={image}
+                  width="100%"
+                  alt="Sheet Music!"
+                  css={css`
+                    filter: invert(${ctx.state.isNightMode ? 1 : 0});
+                    transition: filter ${NightModeTransitionTime};
+                  `}
+                />
+              )
+          )}
       </div>
-      
     </div>
   );
 };

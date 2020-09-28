@@ -4,7 +4,7 @@ import Line from '../../assets/line.svg';
 
 import Context from '../../Context';
 
-const LINE_COUNT = 36;
+import { LINE_COUNT } from '../../constants'
 const counterArray = Array.from(Array(LINE_COUNT).keys());
 
 import { text } from '../../colors';
