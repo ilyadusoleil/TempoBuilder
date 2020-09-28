@@ -9,6 +9,7 @@ import SidebarButton from './SidebarButton';
 import { updateCurrentPiece, deletePiece } from '../../ApiClient';
 
 import { background, text } from '../../colors';
+import { SERVER } from '../../constants.js'
 
 const SidebarContent = (setIsSideBarOpen) => {
   const ctx = useContext(Context);
@@ -20,7 +21,7 @@ const SidebarContent = (setIsSideBarOpen) => {
 
   const handleLogout = () => {
     setIsSideBarOpen(false);
-    window.open('http://localhost:3000/auth/logout', '_self');
+    window.open(`${SERVER}/auth/logout`, '_self');
     ctx.dispatch({ type: 'logout' });
   };
 

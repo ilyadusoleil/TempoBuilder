@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+import {SERVER as BASE_URL} from './constants.js'
 
  function newPiece(newPiece) {
   fetchRequest('piece', {

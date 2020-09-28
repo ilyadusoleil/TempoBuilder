@@ -3,3 +3,5 @@ export const LINE_COUNT = 22;
 export const MEDIA_QUERY_WIDTH = "@media (min-width: 1000px)";
 export const BUTTON_HEIGHT = '40px';
 export const BORDER_RADIUS = '3px';
+
+export const SERVER = 'http://localhost:3000';

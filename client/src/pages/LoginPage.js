@@ -3,12 +3,12 @@ import { css } from '@emotion/core';
 
 import background from '../assets/music-sheet-1326999_1920.jpg';
 import GoogleButton from 'react-google-button';
-import { HEADER_HEIGHT } from '../constants.js';
+import { HEADER_HEIGHT, SERVER } from '../constants';
 import Logo from '../components/Logo';
 
 const LoginPage = () => {
   const LoginGoogle = () => {
-    window.open('http://localhost:3000/auth/google', '_self');
+    window.open(`${SERVER}/auth/google`, '_self');
   };
 
   return (

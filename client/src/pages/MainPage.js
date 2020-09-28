@@ -5,11 +5,13 @@ import Context from '../Context';
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 
+import { SERVER } from '../constants.js'
+
 const MainPage = () => {
   const ctx = useContext(Context);
 
   useEffect(() => {
-    fetch('http://localhost:3000/auth/login/success', {
+    fetch(`${SERVER}/auth/login/success`, {
       method: 'GET',
       credentials: 'include',
       headers: {
