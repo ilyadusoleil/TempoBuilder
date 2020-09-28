@@ -15,18 +15,12 @@ const GetSession = (ctx, pieceNum, dayNum, sessionNum) =>
   ctx.state.pieces[pieceNum].plan[dayNum][sessionNum];
 
 const GetCurrentSessionImageIndex = (ctx) => {
-  const letter = GetCurrentSessionDetails(ctx).letter.toLowerCase();
+  const section = GetCurrentSessionDetails(ctx).section;
 
-  const MAP = {
-    a: 0,
-    b: 1,
-    c: 2,
-    d: 3,
-  };
-  if (MAP[letter] !== undefined) {
-    return MAP[letter];
+  if (section >= -1 && section < GetCurrentPiece(ctx).sectionsCount) {
+    return section;
   } else {
-    console.log('unrecognised (inc "all") letter');
+    console.log('unrecognised section', section, 'max', GetCurrentPiece(ctx).sectionsCount);
     return -1;
   }
 };

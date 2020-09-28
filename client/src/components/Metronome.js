@@ -126,6 +126,7 @@ const Metronome = () => {
         background: ${background(ctx)};
         transition: ${NightModeTransitionTime};
         ${MEDIA_QUERY_WIDTH} {
+          align-items: flex-start;
           flex-direction: row;
           justify-content: space-around;
         }
@@ -151,11 +152,16 @@ const Metronome = () => {
         <MetronomeBar />
         <PlayButton isPlaying={isPlaying} handleClick={toggleIsPlaying} />
       </div>
-      {GetCurrentPiece(ctx) &&
+      <div css={css`
+      flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      `}>
+        {GetCurrentPiece(ctx) &&
         GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)] && (
           <img
             src={GetCurrentPiece(ctx).images[GetCurrentSessionImageIndex(ctx)]}
-            width="50%"
+            width="100%"
             alt="Sheet Music!"
             css={css`
               filter: invert(${ctx.state.isNightMode ? 1 : 0});
@@ -163,6 +169,22 @@ const Metronome = () => {
             `}
           />
         )}
+      {GetCurrentPiece(ctx) &&
+        GetCurrentSessionImageIndex(ctx) === -1 &&
+        GetCurrentPiece(ctx).images.map((image, i) => (
+          image && <img
+            key={i}
+            src={image}
+            width="100%"
+            alt="Sheet Music!"
+            css={css`
+              filter: invert(${ctx.state.isNightMode ? 1 : 0});
+              transition: filter ${NightModeTransitionTime};
+            `}
+          />
+        ))}
+      </div>
+      
     </div>
   );
 };

@@ -35,6 +35,11 @@ const Session = ({ piece, day, session }) => {
     }
   }, []);
 
+  const SectionString = (idx) => {
+    if (idx < 0) return 'Full run';
+    return `Section ${idx + 1}`;
+  };
+
   return (
     <button
       css={css`
@@ -50,14 +55,12 @@ const Session = ({ piece, day, session }) => {
         padding: 2px 10px;
         font-size: 20px;
         height: 40px;
-        color: ${text(ctx)}
+        color: ${text(ctx)};
       `}
       onClick={handleClick}
     >
-
-        Section {sessionInfo.letter.toUpperCase()} - {sessionInfo.repetitions} time
-        {sessionInfo.repetitions > 1 ? 's' : ''} at {sessionInfo.percent}% tempo
-
+      {SectionString(sessionInfo.section)} - {sessionInfo.repetitions} time
+      {sessionInfo.repetitions > 1 ? 's' : ''} at {sessionInfo.percent}% tempo
     </button>
   );
 };

@@ -1,8 +1,6 @@
-const MAP = ['a', 'b', 'c', 'd', 'e'];
-
-const sessionFactory = (letter, repetitions, percent) => {
+const sessionFactory = (section, repetitions, percent) => {
   return {
-    letter,
+    section,
     repetitions,
     percent,
   };
@@ -16,21 +14,21 @@ const GeneratePlan = (numSections) => {
   let res = [];
 
   for (let i = 0; i < numSections; i++) {
-    res.push([sessionFactory(MAP[i], 3, 50)]);
+    res.push([sessionFactory(i, 3, 50)]);
   }
   for (let i = 0; i < numSections; i++) {
     res.push([
-      sessionFactory(MAP[i], 1, 75),
-      sessionFactory(MAP[(i + 1) % numSections], 2, 65),
-      sessionFactory(MAP[(i + 2) % numSections], 3, 55),
+      sessionFactory(i, 1, 75),
+      sessionFactory((i + 1) % numSections, 2, 65),
+      sessionFactory((i + 2) % numSections, 3, 55),
     ]);
   }
   for (let i = 0; i < numSections; i++) {
     res.push([
-      sessionFactory('all', 1, 100 - ((numSections - i) * 5)),
-      sessionFactory(MAP[i], 1, 85),
-      sessionFactory(MAP[(i + 1) % numSections], 1, 75),
-      sessionFactory(MAP[(i + 2) % numSections], 2, 65),
+      sessionFactory(-1, 1, 100 - ((numSections - i) * 5)), //section of -1 is for the entire piece
+      sessionFactory(i, 1, 85),
+      sessionFactory((i + 1) % numSections, 1, 75),
+      sessionFactory((i + 2) % numSections, 2, 65),
     ]);
   }
 
