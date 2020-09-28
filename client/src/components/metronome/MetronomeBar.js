@@ -4,7 +4,7 @@ import Line from '../../assets/line.svg';
 
 import Context from '../../Context';
 
-const LINE_COUNT = 40;
+const LINE_COUNT = 36;
 const counterArray = Array.from(Array(LINE_COUNT).keys());
 
 import { text } from '../../colors';
@@ -26,7 +26,7 @@ const MetronomeBar = () => {
       margin-top: 15px;
     `}>
       {counterArray.map((i) => (
-        <Line stroke={text(ctx)} height={calcLineHeight(i)} width="10px" key={i} id={`L${i}`} />
+        <Line stroke={text(ctx)} fill={text(ctx)} height={calcLineHeight(i)} width="10px" key={i} id={`L${i}`} />
       ))}
     </div>
   );

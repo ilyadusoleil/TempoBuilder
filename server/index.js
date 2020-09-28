@@ -8,7 +8,6 @@ const MongoStore = require('connect-mongo')(session)
 const cors = require("cors");
 const connectDB = require('./config/db');
 
-
 //load config
 dotenv.config({ path: './config/config.env' });
 

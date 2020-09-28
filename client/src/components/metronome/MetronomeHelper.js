@@ -9,7 +9,7 @@ const Animate = (tempo) => {
         `#L${i}`,
         { scaleX: 1 },
         {
-          scaleX: 3,
+          scaleX: 2,
           duration: 60 / tempo / 5,
           delay: (i - 1) / (tempo * 2),
           repeat: 1,
@@ -23,7 +23,7 @@ const Animate = (tempo) => {
         `#L${i}`,
         { scaleX: 1 },
         {
-          scaleX: 3,
+          scaleX: 2,
           duration: 60 / tempo / 5,
           delay: ((i - 39) * -1) / (tempo * 2),
           repeat: 1,

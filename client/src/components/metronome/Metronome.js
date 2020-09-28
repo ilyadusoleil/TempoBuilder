@@ -122,6 +122,8 @@ const Metronome = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
+          padding: 30px;
+          padding-top: 0px
         `}
       >
         {ctx.state.pieces.length > ctx.state.currentPiece ? (
