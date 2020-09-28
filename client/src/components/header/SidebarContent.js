@@ -10,7 +10,6 @@ import { updateCurrentPiece, deletePiece } from '../../ApiClient';
 
 import { background, text } from '../../colors';
 
-
 const SidebarContent = (setIsSideBarOpen) => {
   const ctx = useContext(Context);
 
@@ -65,10 +64,10 @@ const SidebarContent = (setIsSideBarOpen) => {
             ctx.dispatch({ type: 'setDisplayStateEdit', payload: i }); // TODO consider updating payload to _id instead
           }}
           onTrash={() => {
-            console.log('trash', piece._id);
-
-            ctx.dispatch({ type: 'deletePiece', payload: piece._id });
-            deletePiece(piece._id);
+            if (confirm(`Are you sure you want to delete ${piece.name}`)) {
+              ctx.dispatch({ type: 'deletePiece', payload: piece._id });
+              deletePiece(piece._id);
+            }
 
             //TODO if deleting a piece, changes the currentPiece, need to update this index on the server as well.
           }}
