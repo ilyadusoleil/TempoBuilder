@@ -22,6 +22,11 @@ function getPieces(ctx) {
   })
     .then((res) => {
       res.forEach((piece) => {
+        // Check currentDay
+        if (piece.currentDay >= piece.plan.length) {
+          piece.currentDay = piece.plan.length - 1;
+        }
+
         ctx.dispatch({ type: 'addNewPiece', payload: piece });
       });
     });
