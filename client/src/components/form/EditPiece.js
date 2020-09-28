@@ -44,6 +44,7 @@ const EditPiece = () => {
           flex-direction: column;
           align-items: center;
           margin: 20px;
+          color: ${text(ctx)};
         `}
         onSubmit={handleSubmit(onSubmit)}
       >

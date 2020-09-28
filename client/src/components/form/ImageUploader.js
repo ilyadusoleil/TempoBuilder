@@ -13,6 +13,7 @@ const ImageUploader = ({ setImageArray, numSections, imageArray }) => {
         flex-direction: column;
         ${MEDIA_QUERY_WIDTH} {
           flex-direction: row;
+          align-items: center;
         }
       `}
     >
@@ -22,7 +23,9 @@ const ImageUploader = ({ setImageArray, numSections, imageArray }) => {
           css={css`
             display: ${numSections >= i + 1 ? 'flex' : 'none'};
             flex-direction: column;
-            width: 15vw;
+            ${MEDIA_QUERY_WIDTH} {
+              width: 15vw;
+            }
             align-items: center;
             margin: 15px;
           `}

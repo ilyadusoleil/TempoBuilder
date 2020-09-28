@@ -1,9 +1,17 @@
 /* eslint-disable jsx-a11y/no-onchange */
 //TODO remove above eslint
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../../Context';
 
 import { css } from '@emotion/core';
 import ImageUploader from './ImageUploader';
+
+import { text } from '../../colors';
+
+const errorCss = css`
+  color: red;
+  margin-top: -5px;
+`;
 
 const PieceForm = ({
   register,
@@ -14,13 +22,15 @@ const PieceForm = ({
   setImageArray,
   pieceInfo,
 }) => {
+  const ctx = useContext(Context);
+
   return (
     <div
       css={css`
         display: flex;
         flex-direction: column;
         align-items: center;
-        color: blue;
+        color: ${text(ctx)};
       `}
     >
       <div
@@ -44,7 +54,9 @@ const PieceForm = ({
             },
           })}
         />
-        {errors.pieceName && errors.pieceName.message}
+        {errors.pieceName && (
+          <div css={errorCss}>{errors.pieceName.message}</div>
+        )}
         <div className="inputLabel">Target Tempo (bpm):</div>
         <input
           type="number"
@@ -63,7 +75,9 @@ const PieceForm = ({
             },
           })}
         />
-        {errors.tempoTarget && errors.tempoTarget.message}
+        {errors.tempoTarget && (
+          <div css={errorCss}>{errors.tempoTarget.message}</div>
+        )}
         <div
           css={css`
             display: flex;
@@ -91,7 +105,9 @@ const PieceForm = ({
           </select>
         </div>
 
-        {errors.sectionsCount && errors.sectionsCount.message}
+        {errors.sectionsCount && (
+          <div css={errorCss}>{errors.sectionsCount.message}</div>
+        )}
       </div>
 
       <ImageUploader

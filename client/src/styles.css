@@ -14,3 +14,8 @@ body {
 .inputLabel {
   margin-top: 8px;
 }
+
+input {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
