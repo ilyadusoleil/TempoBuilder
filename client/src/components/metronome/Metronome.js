@@ -7,7 +7,7 @@ import { Animate } from './MetronomeHelper';
 import Context, {
   GetCurrentPiece,
   GetCurrentSessionImageIndex,
-} from '../Context';
+} from '../../Context';
 
 import CurrentPlanHeader from './CurrentPlanHeader';
 import SessionsList from './SessionsList';
@@ -15,8 +15,8 @@ import SetTempo from './SetTempo';
 import MetronomeBar from './MetronomeBar';
 import PlayButton from './PlayButton';
 
-import { MEDIA_QUERY_WIDTH } from '../constants';
-import { background, NightModeTransitionTime } from '../colors';
+import { MEDIA_QUERY_WIDTH } from '../../constants';
+import { background, NightModeTransitionTime } from '../../colors';
 
 let timerWorker = new Worker(MetronomeWorker);
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -39,8 +39,6 @@ const Metronome = () => {
 
   const tick = (beat, time) => {
     if (beat == 0) {
-      console.log('tick');
-
       const osc = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
       osc.connect(gainNode);
@@ -56,18 +54,9 @@ const Metronome = () => {
   };
 
   const runScheduler = () => {
-    // while (
-    //   this.nextNoteTime <
-    //   this.audioContext.currentTime + SCHEDULE_AHEAD_TIME
-    // ) {
-
     const currentTempo = calculateTempo();
-    console.log('currentTempo', currentTempo);
     const beatsPerTick = 60000 / 25 / currentTempo;
     tick(currentBeat, audioContext.currentTime);
-    // const SECONDS_IN_MINUTE = 60;
-    // const secondsPerBeat = SECONDS_IN_MINUTE / currentTempo;
-    // nextNoteTime += secondsPerBeat / beatsPerTick;
 
     currentBeat++;
     if (currentBeat >= beatsPerTick) {
@@ -77,10 +66,6 @@ const Metronome = () => {
 
   const start = () => {
     currentBeat = 0;
-    // nextNoteTime = audioContext.currentTime;
-
-    console.log('start');
-
     timerWorker.postMessage({
       action: 'START',
     });

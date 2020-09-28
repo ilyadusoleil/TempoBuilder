@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
-import Context, { GetCurrentPiece } from '../Context';
-import { text } from '../colors';
+import Context, { GetCurrentPiece } from '../../Context';
+import { text } from '../../colors';
 
 const CurrentPlanHeader = () => {
   const ctx = useContext(Context);

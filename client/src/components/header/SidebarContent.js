@@ -14,13 +14,11 @@ const SidebarContent = (setIsSideBarOpen) => {
   const ctx = useContext(Context);
 
   const handleNewPiece = () => {
-    console.log('form');
     setIsSideBarOpen(false);
     ctx.dispatch({ type: 'setDisplayState', payload: 'form' });
   };
 
   const handleLogout = () => {
-    console.log('log out');
     setIsSideBarOpen(false);
     window.open('http://localhost:3000/auth/logout', '_self');
     ctx.dispatch({ type: 'logout' });

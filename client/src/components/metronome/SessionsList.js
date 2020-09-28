@@ -7,10 +7,10 @@ import Context, {
   GetCurrentDay,
   GetCurrentPiece,
   GetCurrentSessionDetailsList,
-} from '../Context';
+} from '../../Context';
 
-import { updateCurrentDay } from '../ApiClient';
-import { primary, secondary, text } from '../colors';
+import { updateCurrentDay } from '../../ApiClient';
+import { primary, secondary, text } from '../../colors';
 
 const buttonStyling = (ctx) => css`
   cursor: pointer;

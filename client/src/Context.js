@@ -1,9 +1,8 @@
 import { createContext } from 'react';
 import _ from 'lodash';
-import { deletePiece } from './ApiClient';
 
 const Context = createContext({});
-
+// Helper functions for use within components
 const GetCurrentPiece = (ctx) => ctx.state.pieces[ctx.state.currentPiece];
 const GetCurrentDay = (ctx) => GetCurrentPiece(ctx).currentDay;
 const GetCurrentSessionIdx = (ctx) => GetCurrentPiece(ctx).currentSession;
@@ -20,19 +19,18 @@ const GetCurrentSessionImageIndex = (ctx) => {
   if (section >= -1 && section < GetCurrentPiece(ctx).sectionsCount) {
     return section;
   } else {
-    console.log('unrecognised section', section, 'max', GetCurrentPiece(ctx).sectionsCount);
+    // eslint-disable-next-line no-console
+    console.log('unrecognised section index', section);
     return -1;
   }
 };
 
+// Helper functions for internal use within this file
 const getCurrentPieceFromState = (state) => state.pieces[state.currentPiece];
-
 const getCurrentDayFromState = (state) =>
   state.pieces[state.currentPiece].currentDay;
-
 const getCurrentSessionNumFromState = (state) =>
   state.pieces[state.currentPiece].currentSession;
-
 const getCurrentSessionFromState = (state) =>
   state.pieces[state.currentPiece].plan[getCurrentDayFromState(state)][
     getCurrentSessionNumFromState(state)
@@ -47,7 +45,7 @@ const UpdateSession = (state, val) => {
   return newState;
 };
 
-// FIXME ensure min < max
+// TODO ensure min < max
 const LimitMaxMin = (value, min, max) => {
   if (value > max) return max;
   if (value < min) return min;
@@ -98,7 +96,8 @@ const UpdatePiece = (state, updatePiece) => {
     (piece) => piece._id === updatePiece._id
   );
   if (pieceIndex == -1) {
-    console.log('unable to locally update piece');
+    // eslint-disable-next-line no-console
+    console.log('Unable to locally update piece');
     return newState;
   }
   newState.pieces[pieceIndex] = updatePiece;
@@ -176,7 +175,8 @@ const reducer = (state, action) => {
       return Object.assign({}, state, { isNightMode: !state.isNightMode });
 
     default:
-      console.log('uncaught context state change');
+      // eslint-disable-next-line no-console
+      console.log('Uncaught context state change');
       return state;
   }
 };

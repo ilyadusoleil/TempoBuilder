@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
 import {css} from '@emotion/core'
 
-import Context from '../Context';
+import Context from '../../Context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlayCircle, faStopCircle } from '@fortawesome/free-solid-svg-icons'
-import { primary, secondary, text } from '../colors';
+import { text } from '../../colors';
 
 const PlayButton = ({ isPlaying, handleClick }) => {
   const ctx = useContext(Context);

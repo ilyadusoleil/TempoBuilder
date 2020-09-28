@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { css } from '@emotion/core';
-
-import Context from '../Context';
 
 import background from '../assets/music-sheet-1326999_1920.jpg';
 import GoogleButton from 'react-google-button';
@@ -9,8 +7,6 @@ import { HEADER_HEIGHT } from '../constants.js';
 import Logo from '../components/Logo';
 
 const LoginPage = () => {
-  const ctx = useContext(Context);
-
   const LoginGoogle = () => {
     window.open('http://localhost:3000/auth/google', '_self');
     console.log('login google hmm');

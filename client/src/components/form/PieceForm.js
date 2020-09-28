@@ -1,13 +1,10 @@
 /* eslint-disable jsx-a11y/no-onchange */
 
-import React, { useContext } from 'react';
-
-import Context from '../../Context';
+import React from 'react';
 
 import { css } from '@emotion/core';
 import ImageUploader from './ImageUploader';
 
-import { text } from '../../colors';
 
 const PieceForm = ({
   register,
@@ -18,8 +15,6 @@ const PieceForm = ({
   setImageArray,
   pieceInfo,
 }) => {
-  const ctx = useContext(Context);
-
   return (
     <div
       css={css`
@@ -89,7 +84,6 @@ const PieceForm = ({
             defaultValue={numSections}
             onChange={(e) => {
               setNumSections(parseInt(e.target.value));
-              console.log('number of sections', e.target.value, numSections);
             }}
           >
             <option value="3">3</option>

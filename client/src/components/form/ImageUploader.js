@@ -36,9 +36,7 @@ const ImageUploader = ({ setImageArray, numSections, imageArray }) => {
             type="file"
             onChange={(e) => {
               if (e.target?.files[0]) {
-                console.log('changed', e.target.files[0]);
                 uploadImage(e.target.files[0]).then((res) => {
-                  console.log('uploaded', res.url);
                   setImageArray((oldArray) => {
                     let output = [...oldArray];
                     output[i] = res.url;

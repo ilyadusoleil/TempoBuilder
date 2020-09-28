@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
 import {css} from '@emotion/core';
-import Line from '../assets/line.svg';
+import Line from '../../assets/line.svg';
 
-import Context from '../Context';
+import Context from '../../Context';
 
 const LINE_COUNT = 40;
 const counterArray = Array.from(Array(LINE_COUNT).keys());
 
-import { text } from '../colors';
+import { text } from '../../colors';
 
 const MetronomeBar = () => {
   const ctx = useContext(Context)

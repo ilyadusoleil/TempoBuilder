@@ -3,7 +3,6 @@ const BASE_URL = 'http://localhost:3000';
 
 function updateCurrentPiece(newCurrentPieceIdx) {
   const sending = { currentPiece: newCurrentPieceIdx };
-  console.log('sending', sending);
   fetchRequest('/piece/currentPiece', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -14,7 +13,8 @@ function updateCurrentPiece(newCurrentPieceIdx) {
 
 function updateCurrentDay(pieceId, newCurrentDay) {
   const sending = { id: pieceId, currentDay: newCurrentDay };
-  console.log('sending (day)', sending);
+  // eslint-disable-next-line no-console
+  console.log('sending (day)', sending); //TODO remove this once bug with updating day with newly created piece is fixed
   fetchRequest('/piece/currentDay', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -25,7 +25,6 @@ function updateCurrentDay(pieceId, newCurrentDay) {
 
 function updateCurrentSession(pieceId, newCurrentSession) {
   const sending = { id: pieceId, currentSession: newCurrentSession };
-  console.log('sending (session)', sending);
   fetchRequest('/piece/currentSession', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

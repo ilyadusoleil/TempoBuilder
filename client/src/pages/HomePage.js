@@ -1,6 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { css } from '@emotion/core';
-// import { useQuery } from 'react-query';
 
 import Sidebar from 'react-sidebar';
 
@@ -8,7 +6,7 @@ import Context from '../Context';
 
 import Header from '../components/header/Header';
 import SidebarContent from '../components/header/SidebarContent';
-import Metronome from '../components/Metronome';
+import Metronome from '../components/metronome/Metronome';
 
 import NewPlan from '../components/form/NewPiece';
 import EditPlan from '../components/form/EditPiece';
@@ -18,12 +16,6 @@ import { SERVER } from '../constants';
 import { background, NightModeTransitionTime } from '../colors';
 
 const HomePage = () => {
-  // const { isLoading, error, data } = useQuery('repoData', () =>
-  //   fetch(
-  //     `${SERVER}/piece`
-  //   ).then((res) => res.json()).then(() => console.log(data))
-  // );
-
   const ctx = useContext(Context);
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
@@ -31,7 +23,6 @@ const HomePage = () => {
 
   // if (error) return 'An error has occurred: ' + error.message;
   useEffect(() => {
-    console.log('home page loaded');
 
     fetch(`${SERVER}/piece`, {
       method: 'GET',
@@ -40,7 +31,6 @@ const HomePage = () => {
     })
       .then((res) => (res.status != 204 ? res.json() : res))
       .then((res) => {
-        console.log('returned', res);
         res.forEach((piece) => {
           ctx.dispatch({ type: 'addNewPiece', payload: piece });
         });

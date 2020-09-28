@@ -5,10 +5,10 @@ import Context, {
   GetSession,
   GetCurrentPiece,
   GetCurrentSessionIdx,
-} from '../Context';
+} from '../../Context';
 
-import { updateCurrentSession } from '../ApiClient';
-import { primary, secondary, text } from '../colors';
+import { updateCurrentSession } from '../../ApiClient';
+import { primary, secondary, text } from '../../colors';
 
 const Session = ({ piece, day, session }) => {
   const ctx = useContext(Context);
@@ -24,7 +24,6 @@ const Session = ({ piece, day, session }) => {
 
   const handleClick = () => {
     ctx.dispatch({ type: 'updateSession', payload: session });
-    console.log('click', GetCurrentPiece(ctx));
     updateCurrentSession(GetCurrentPiece(ctx)._id, session);
   };
 

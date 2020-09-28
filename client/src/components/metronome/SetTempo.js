@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
-import Context from '../Context';
+import Context from '../../Context';
 
 import SetNumber from './SetNumber';
-import { text } from '../colors';
+import { text } from '../../colors';
 const SetTempo = () => {
   const ctx = useContext(Context);
   return (

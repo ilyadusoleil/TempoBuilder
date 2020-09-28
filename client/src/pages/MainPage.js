@@ -27,27 +27,23 @@ const MainPage = () => {
         throw new Error('failed to authenticate user');
       })
       .then((responseJson) => {
-        console.log(responseJson.user);
         ctx.dispatch({ type: 'setIsAuthenticated', payload: true });
         ctx.dispatch({ type: 'setIsLoggedIn', payload: true });
-        // setIsAuthenticated(true);
         ctx.dispatch({ type: 'setUser', payload: responseJson.user });
-        console.log('currentpiece: ', responseJson.user.currentPiece);
         ctx.dispatch({
           type: 'updateCurrentPiece',
           payload: responseJson.user.currentPiece,
         });
-        // setUser(responseJson.user);
       })
       .catch((error) => {
-        // setIsAuthenticated(false);
         ctx.dispatch({ type: 'setIsAuthenticated', payload: false });
         ctx.dispatch({ type: 'setIsLoggedIn', payload: false });
         ctx.dispatch({
           type: 'setAuthError',
           payload: 'Failed to authenticate user',
         });
-        // setError('Failed to authenticate user')
+        // eslint-disable-next-line no-console
+        console.error("Failed to authenticate user", error)
       });
   }, []);
 

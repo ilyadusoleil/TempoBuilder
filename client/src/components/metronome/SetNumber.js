@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { css } from '@emotion/core';
 
-import Context from '../Context'
+import Context from '../../Context'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare as plusIcon, faMinusSquare as minusIcon} from '@fortawesome/free-solid-svg-icons';
-import { primary, secondary, text } from '../colors';
+import {  text } from '../../colors';
 /**
  * value - key of value in context
  * action - na,e
