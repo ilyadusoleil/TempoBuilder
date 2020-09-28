@@ -9,6 +9,7 @@ import Context, {
 
 import { updateCurrentSession } from '../../ApiClient';
 import { primary, secondary, text } from '../../colors';
+import { BUTTON_HEIGHT, BORDER_RADIUS } from '../../constants';
 
 const Session = ({ piece, day, session }) => {
   const ctx = useContext(Context);
@@ -45,15 +46,15 @@ const Session = ({ piece, day, session }) => {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin: 10px;
+        margin-bottom: 8px;
         border: none;
         background: ${bkColor()};
         cursor: pointer;
 
-        border-radius: 5px;
-        padding: 2px 10px;
-        font-size: 20px;
-        height: 40px;
+        border-radius: ${BORDER_RADIUS};
+        padding: 4px 10px;
+
+        height: ${BUTTON_HEIGHT};
         color: ${text(ctx)};
       `}
       onClick={handleClick}

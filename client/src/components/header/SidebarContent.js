@@ -27,7 +27,7 @@ const SidebarContent = (setIsSideBarOpen) => {
   return (
     <div
       css={css`
-        width: 200px;
+        width: 230px;
         display: flex;
         flex-direction: column;
         padding: 0px 20px;

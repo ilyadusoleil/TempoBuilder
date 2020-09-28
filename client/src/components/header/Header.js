@@ -32,6 +32,7 @@ const Header = ({ setIsSideBarOpen }) => {
           &:hover {
             transform: scale(1.3);
           }
+          padding: 10px;
         `}
         onClick={() =>
           ctx.state.displayState === 'home'
@@ -63,7 +64,7 @@ const Header = ({ setIsSideBarOpen }) => {
             &:hover {
               transform: scale(1.3);
             }
-            margin-right: 10px;
+            padding: 10px;
           `}
           onClick={() => ctx.dispatch({ type: 'toggleNightMode' })}
           color={text(ctx)}

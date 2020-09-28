@@ -11,16 +11,18 @@ import Context, {
 
 import { updateCurrentDay } from '../../ApiClient';
 import { primary, secondary, text } from '../../colors';
+import { BUTTON_HEIGHT as buttonHeight, BORDER_RADIUS } from '../../constants';
 
-const buttonStyling = (ctx) => css`
+const buttonStyling = (ctx, left = 0, right = 0) => css`
   cursor: pointer;
-  height: 50px;
+  height: ${buttonHeight};
   width: 100px;
-  margin: 0px 15px;
+  margin: 0px ${right}px 10px ${left}px;
   border: none;
-  border-radius: 10px;
+  border-radius: ${BORDER_RADIUS};
   background: ${primary(ctx)};
   color: ${text(ctx)};
+  flex-grow: 1;
   &:hover {
     background: ${secondary(ctx)};
   }
@@ -65,12 +67,12 @@ const SessionsList = () => {
         `}
       >
         {GetCurrentDay(ctx) > 0 && (
-          <button css={buttonStyling(ctx)} onClick={prevDay}>
+          <button css={buttonStyling(ctx, 0, 10)} onClick={prevDay}>
             Previous
           </button>
         )}
         {isNotLastDay() && (
-          <button css={buttonStyling(ctx)} onClick={nextDay}>
+          <button css={buttonStyling(ctx, 10, 0)} onClick={nextDay}>
             Next
           </button>
         )}

@@ -10,8 +10,7 @@ const CurrentPlanHeader = () => {
   return (
     <div
       css={css`
-        text-align: center;
-        font-size: 20px;
+        text-align: left;
         margin-bottom: 20px;
         color: ${text(ctx)};
       `}

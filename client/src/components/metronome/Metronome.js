@@ -19,6 +19,7 @@ import { MEDIA_QUERY_WIDTH } from '../../constants';
 import { background, NightModeTransitionTime } from '../../colors';
 
 let timerWorker = new Worker(MetronomeWorker);
+let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 const Metronome = () => {
   const ctx = useContext(Context);
@@ -32,7 +33,6 @@ const Metronome = () => {
   tempoTargetRef.current = ctx.state.tempoTargetManual;
 
   let currentBeat = 0;
-  let audioContext = null;
 
   const calculateTempo = () =>
     Math.floor((tempoPercentRef.current * tempoTargetRef.current) / 100);
@@ -65,8 +65,9 @@ const Metronome = () => {
   };
 
   const start = () => {
-    if (!audioContext)
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    // if (!audioContext) {
+    //   audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    // }
     currentBeat = 0;
     timerWorker.postMessage({
       action: 'START',
