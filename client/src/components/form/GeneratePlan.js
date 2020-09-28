@@ -25,7 +25,7 @@ const GeneratePlan = (numSections) => {
   }
   for (let i = 0; i < numSections; i++) {
     res.push([
-      sessionFactory(-1, 1, 100 - ((numSections - i) * 5)), //section of -1 is for the entire piece
+      sessionFactory(-1, 1, 100 - (numSections - i) * 5), //section of -1 is for the entire piece
       sessionFactory(i, 1, 85),
       sessionFactory((i + 1) % numSections, 1, 75),
       sessionFactory((i + 2) % numSections, 2, 65),

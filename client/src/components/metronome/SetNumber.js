@@ -6,9 +6,11 @@ import Context from '../../Context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare as plusIcon, faMinusSquare as minusIcon} from '@fortawesome/free-solid-svg-icons';
 import {  text } from '../../colors';
+
 /**
  * value - key of value in context
- * action - na,e
+ * action - string key of the action type in the reducer
+ * units - units to display on GUI
  */
 const SetNumber = ({ value, action, units }) => {
   const ctx = useContext(Context);
@@ -17,11 +19,9 @@ const SetNumber = ({ value, action, units }) => {
 
   const increment = () => {
     ctx.dispatch({type: action, payload: 1})
-    // setValue((oldValue) => (oldValue < max ? oldValue + 1 : oldValue));
   };
   const decrement = () => {
     ctx.dispatch({type: action, payload: -1})
-    // setValue((oldValue) => (oldValue > min ? oldValue - 1 : oldValue));
   };
 
   return (

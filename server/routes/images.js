@@ -21,9 +21,10 @@ const storage = new CloudinaryStorage({
     public_id: (req, file) => 'computed-filename-using-request',
   },
 
-  // folder: 'tempoBuilder',
+  // TODO get below properties working
   // allowedFormats: ['png'],
   // transformation: [{ width: 2500, height: 1000, crop: 'limit' }],
+
 });
 
 const parser = multer({ storage: storage });
@@ -37,9 +38,5 @@ router.post('/images', parser.single('image'), (req, res) => {
     .then((newImage) => res.json(newImage))
     .catch((err) => console.log(err));
 });
-// router.post('/images', (req, res) => {
-//   console.log('hello'); // to see what is returned to you
-//   res.sendStatus(200)
-// });
 
 module.exports = router;

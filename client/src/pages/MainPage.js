@@ -8,10 +8,6 @@ import LoginPage from './LoginPage';
 const MainPage = () => {
   const ctx = useContext(Context);
 
-  // const _handleNotAuthenticated = () => {
-  //   ctx.dispatch({type: 'setIsAuthenticated', payload: false});
-  // };
-
   useEffect(() => {
     fetch('http://localhost:3000/auth/login/success', {
       method: 'GET',

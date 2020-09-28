@@ -52,7 +52,6 @@ const LoginPage = () => {
           >
             I need a catchphrase
           </div>
-          {/* <a href="http://localhost:3000/auth/google">Login with goooogle</a> */}
           <GoogleButton type="dark" onClick={LoginGoogle} />
         </div>
       </div>

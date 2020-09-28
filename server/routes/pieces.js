@@ -46,7 +46,6 @@ router.post('/currentPiece', ensureAuth, async (req, res) => {
     );
     console.log('updated user? ', created);
     res.sendStatus(204);
-    // res.send(created);
   } catch (err) {
     console.error(err);
   }
@@ -55,7 +54,6 @@ router.post('/currentPiece', ensureAuth, async (req, res) => {
 // TODO change to patch
 router.post('/currentDay', ensureAuth, async (req, res) => {
   try {
-    //req.body.id and req.body.(new)CurrentDay
     console.log('Update current Day', req.body, 'id', req.user.id);
 
     const created = await Piece.findOneAndUpdate(
@@ -98,7 +96,6 @@ router.get('/', ensureAuth, async (req, res) => {
   }
 });
 
-//TODO test
 router.put('/', ensureAuth, async (req, res) => {
   try {
     console.log('Update (entire) PIECE', req.body.piece);

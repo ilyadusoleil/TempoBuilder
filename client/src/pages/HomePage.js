@@ -18,9 +18,6 @@ const HomePage = () => {
   const ctx = useContext(Context);
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
-  // if (isLoading) return 'Loading...';
-
-  // if (error) return 'An error has occurred: ' + error.message;
   useEffect(() => {
     getPieces(ctx)
   }, []);

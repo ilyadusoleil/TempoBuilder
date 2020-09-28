@@ -88,11 +88,9 @@ const App = () => {
 
   return (
     <React.StrictMode>
-      {/* <ReactQueryCacheProvider queryCache={queryCache}> */}
       <Context.Provider value={{ state, dispatch }}>
         <MainPage />
       </Context.Provider>
-      {/* </ReactQueryCacheProvider> */}
     </React.StrictMode>
   );
 };

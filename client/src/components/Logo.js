@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <div
       css={css`
-      margin-left: 20px;
+        margin-left: 20px;
         font-family: Bowlby;
       `}
     >

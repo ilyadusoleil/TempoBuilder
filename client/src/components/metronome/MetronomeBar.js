@@ -16,10 +16,6 @@ const MetronomeBar = () => {
     const MIN_HEIGHT = 30;
     const HEIGHT_DIFF = MAX_HEIGHT - MIN_HEIGHT;
 
-    // const b = (Math.PI * 2)
-    // const a = b * +index / LINE_COUNT;
-    // console.log('a', a, b, index, LINE_COUNT)
-    // return `${MIN_HEIGHT + HEIGHT_DIFF * Math.sin(a)}px`
     return `${MAX_HEIGHT - HEIGHT_DIFF * Math.sin((Math.PI) * index / LINE_COUNT )}px`
   }
 

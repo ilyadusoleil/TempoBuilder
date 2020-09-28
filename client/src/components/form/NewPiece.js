@@ -7,7 +7,7 @@ import { css } from '@emotion/core';
 import Context from '../../Context';
 import GeneratePlan from './GeneratePlan';
 
-import {newPiece as uploadNewPiece} from '../../ApiClient';
+import { newPiece as uploadNewPiece } from '../../ApiClient';
 
 import { text } from '../../colors';
 import PieceForm from './PieceForm';
@@ -31,7 +31,7 @@ const NewPiece = () => {
     };
 
     // Upload new piece and add to local context
-    uploadNewPiece(newPiece)
+    uploadNewPiece(newPiece);
     ctx.dispatch({ type: 'addNewPiece', payload: newPiece });
     ctx.dispatch({ type: 'setDisplayState', payload: 'home' });
   };

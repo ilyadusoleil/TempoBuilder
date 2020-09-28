@@ -33,10 +33,8 @@ const SessionsList = () => {
     const currentDay = GetCurrentDay(ctx);
     const newCurrentDay = currentDay > 0 ? currentDay - 1 : currentDay;
 
-    // ctx.dispatch({type: 'previousDay'});
     ctx.dispatch({ type: 'updateDay', payload: newCurrentDay });
     updateCurrentDay(GetCurrentPiece(ctx)._id, newCurrentDay);
-    // updateCurrentSession((GetCurrentPiece(ctx)._id, 0));
   };
 
   const isNotLastDay = () => {
@@ -66,12 +64,16 @@ const SessionsList = () => {
           margin-bottom: 10px;
         `}
       >
-        {(GetCurrentDay(ctx) > 0) && <button css={buttonStyling(ctx)} onClick={prevDay}>
-          Previous
-        </button>}
-        {isNotLastDay() && <button css={buttonStyling(ctx)} onClick={nextDay}>
-          Next
-        </button>}
+        {GetCurrentDay(ctx) > 0 && (
+          <button css={buttonStyling(ctx)} onClick={prevDay}>
+            Previous
+          </button>
+        )}
+        {isNotLastDay() && (
+          <button css={buttonStyling(ctx)} onClick={nextDay}>
+            Next
+          </button>
+        )}
       </div>
       {GetCurrentSessionDetailsList(ctx).map((session, i) => (
         <Session

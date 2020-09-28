@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-onchange */
-
+//TODO remove above eslint
 import React from 'react';
 
 import { css } from '@emotion/core';
@@ -41,7 +41,7 @@ const PieceForm = ({
             required: 'Required',
             maxLength: {
               value: 80,
-              message: 'Too long', // <p>error message</p>
+              message: 'Too long',
             },
           })}
         />
@@ -56,11 +56,11 @@ const PieceForm = ({
             required: 'Required',
             max: {
               value: 300,
-              message: 'Choose a lower tempo', // <p>error message</p>
+              message: 'Choose a lower tempo',
             },
             min: {
               value: 30,
-              message: 'Choose a higher tempo', // <p>error message</p>
+              message: 'Choose a higher tempo',
             },
           })}
         />
