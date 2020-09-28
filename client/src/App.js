@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import Context, { reducer } from './Context';
@@ -84,6 +84,10 @@ const App = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    console.log('loaded');
+  }, []);
 
   return (
     <React.StrictMode>

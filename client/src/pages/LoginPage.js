@@ -5,6 +5,8 @@ import Context from '../Context';
 
 import background from '../assets/music-sheet-1326999_1920.jpg';
 import GoogleButton from 'react-google-button';
+import { HEADER_HEIGHT } from '../constants.js';
+import Logo from '../components/Logo';
 
 const LoginPage = () => {
   const ctx = useContext(Context);
@@ -18,19 +20,16 @@ const LoginPage = () => {
     <div>
       <div
         css={css`
-          height: 7vh;
+          height: ${HEADER_HEIGHT}px;
           display: flex;
           align-items: center;
-          margin-left: 20px;
-          font-family: "Bowlby";
-          /* background: lightgray; */
         `}
       >
-        Tempo Builder
+        <Logo/>
       </div>
       <div
         css={css`
-          height: 93vh;
+          height: calc(100vh - ${HEADER_HEIGHT}px);
           display: flex;
           /* flex-direction: column; */
           justify-content: center;
@@ -51,11 +50,14 @@ const LoginPage = () => {
             border-radius: 5px;
           `}
         >
-          <div css={css`
-            margin-bottom: 30px;
-            font-size: 20px;
-
-          `}>I need a catchphrase</div>
+          <div
+            css={css`
+              margin-bottom: 30px;
+              font-size: 20px;
+            `}
+          >
+            I need a catchphrase
+          </div>
           {/* <a href="http://localhost:3000/auth/google">Login with goooogle</a> */}
           <GoogleButton type="dark" onClick={LoginGoogle} />
         </div>

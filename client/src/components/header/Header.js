@@ -6,6 +6,7 @@ import { HEADER_HEIGHT } from '../../constants';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHome, faMoon } from '@fortawesome/free-solid-svg-icons';
+import Logo from '../Logo';
 
 import { header, primary, text } from '../../colors';
 
@@ -43,14 +44,11 @@ const Header = ({ setIsSideBarOpen }) => {
       />
       <div
         css={css`
-          font-size: 25px;
-          font-weight: 800;
-          margin-left: 15px;
           color: ${text(ctx)};
           transition: color 500ms;
         `}
       >
-        Tempo Builder
+        <Logo />
       </div>
       <div
         css={css`
