@@ -27,9 +27,6 @@ const EditPiece = () => {
       images: imageArray,
     };
 
-    // Convert data into new piece and add to context
-    console.log('submit', newPiece);
-
     ctx.dispatch({ type: 'updatePiece', payload: newPiece });
     ctx.dispatch({ type: 'setDisplayState', payload: 'home' });
     updatePiece(newPiece);

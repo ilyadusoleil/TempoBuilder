@@ -7,7 +7,7 @@ import { css } from '@emotion/core';
 import Context from '../../Context';
 import GeneratePlan from './GeneratePlan';
 
-import { SERVER } from '../../constants';
+import {newPiece as uploadNewPiece} from '../../ApiClient';
 
 import { text } from '../../colors';
 import PieceForm from './PieceForm';
@@ -20,8 +20,6 @@ const NewPiece = () => {
   const [imageArray, setImageArray] = useState(new Array(5));
 
   const onSubmit = async (data) => {
-    console.log('submit');
-
     const newPiece = {
       name: data.pieceName,
       tempoTarget: data.tempoTarget,
@@ -32,16 +30,8 @@ const NewPiece = () => {
       plan: GeneratePlan(data.sectionsCount),
     };
 
-    // Convert data into new piece and add to context
-    console.log('newPiece sending', newPiece);
-
-    fetch(`${SERVER}/piece`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(newPiece),
-    }).then((res) => console.log('returned', res, res.body));
-
+    // Upload new piece and add to local context
+    uploadNewPiece(newPiece)
     ctx.dispatch({ type: 'addNewPiece', payload: newPiece });
     ctx.dispatch({ type: 'setDisplayState', payload: 'home' });
   };

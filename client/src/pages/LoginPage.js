@@ -9,7 +9,6 @@ import Logo from '../components/Logo';
 const LoginPage = () => {
   const LoginGoogle = () => {
     window.open('http://localhost:3000/auth/google', '_self');
-    console.log('login google hmm');
   };
 
   return (
@@ -27,7 +26,6 @@ const LoginPage = () => {
         css={css`
           height: calc(100vh - ${HEADER_HEIGHT}px);
           display: flex;
-          /* flex-direction: column; */
           justify-content: center;
           align-items: center;
           background: url(${background}) no-repeat center center fixed;

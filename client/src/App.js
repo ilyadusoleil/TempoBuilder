@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom';
 
 import Context, { reducer } from './Context';
@@ -21,6 +21,7 @@ const App = () => {
     currentPiece: 0,
 
     pieces: [
+      // TODO remove reference dummy data below
       // {
       //   name: 'Arban 1',
       //   tempoTarget: 108,
@@ -84,10 +85,6 @@ const App = () => {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    console.log('loaded');
-  }, []);
 
   return (
     <React.StrictMode>

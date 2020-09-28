@@ -1,5 +1,31 @@
 const BASE_URL = 'http://localhost:3000';
 
+ function newPiece(newPiece) {
+  fetchRequest('piece', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(newPiece),
+  });
+}
+
+/**
+ * Gets pieces from server and adds them to context
+ * 
+ * @param ctx - 'global' context object
+ */
+function getPieces(ctx) {
+  fetchRequest('/piece', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+  })
+    .then((res) => {
+      res.forEach((piece) => {
+        ctx.dispatch({ type: 'addNewPiece', payload: piece });
+      });
+    });
+}
 
 function updateCurrentPiece(newCurrentPieceIdx) {
   const sending = { currentPiece: newCurrentPieceIdx };
@@ -82,6 +108,8 @@ function fetchRequest(path, options) {
 }
 
 export {
+  newPiece,
+  getPieces,
   updateCurrentPiece,
   updateCurrentDay,
   updateCurrentSession,
