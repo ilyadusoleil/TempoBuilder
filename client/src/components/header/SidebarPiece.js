@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/core';
 
 import Context from '../../Context';
@@ -34,7 +34,7 @@ const SidebarPiece = ({
         icon={music}
         color={text(ctx)}
         css={css`
-          margin-right: 10px;
+          margin-right: 20px;
         `}
       />
       <div
@@ -50,7 +50,7 @@ const SidebarPiece = ({
           css={css`
             font-size: 15px;
             margin-bottom: 3px;
-            color: ${text(ctx)}
+            color: ${text(ctx)};
           `}
         >
           {name}
@@ -59,7 +59,7 @@ const SidebarPiece = ({
           css={css`
             font-size: 12px;
             margin-left: 10px;
-            color: ${primary(ctx)}
+            color: ${primary(ctx)};
           `}
         >
           Day {progressDays}/{totalDays}
@@ -69,7 +69,11 @@ const SidebarPiece = ({
         size="1x"
         icon={edit}
         css={css`
+          padding: 0px 5px;
           margin-right: 10px;
+          &:hover {
+            transform: scale(1.3);
+          }
         `}
         onClick={onEdit}
         onKeyDown={onEdit}
@@ -81,7 +85,11 @@ const SidebarPiece = ({
         size="1x"
         icon={trash}
         css={css`
+          padding: 0px 5px;
           margin-right: 10px;
+          &:hover {
+            transform: scale(1.3);
+          }
         `}
         onClick={onTrash}
         onKeyDown={onTrash}

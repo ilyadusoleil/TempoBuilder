@@ -4,8 +4,10 @@ import { css } from '@emotion/core';
 import Context from '../../Context';
 import { text as textColor } from '../../colors';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { sidebarButtonStyle } from './SidebarStyles';
-const SidebarButton = ({ onClick, text }) => {
+const SidebarButton = ({ onClick, text, icon }) => {
   const ctx = useContext(Context);
 
   return (
@@ -22,7 +24,23 @@ const SidebarButton = ({ onClick, text }) => {
       role="button"
       tabIndex="0"
     >
-      {text}
+      {icon && (
+        <FontAwesomeIcon
+          size="1x"
+          icon={icon}
+          color={textColor(ctx)}
+          css={css`
+            margin-right: 20px;
+          `}
+        />
+      )}
+      <div
+        css={css`
+          align-self: center;
+        `}
+      >
+        {text}
+      </div>
     </div>
   );
 };

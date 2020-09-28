@@ -8,6 +8,11 @@ import SidebarButton from './SidebarButton';
 
 import { updateCurrentPiece, deletePiece } from '../../ApiClient';
 
+import {
+  faPlusSquare as newIcon,
+  faSignOutAlt as logout,
+} from '@fortawesome/free-solid-svg-icons';
+
 import { background, text } from '../../colors';
 import { SERVER } from '../../constants.js'
 
@@ -28,10 +33,10 @@ const SidebarContent = (setIsSideBarOpen) => {
   return (
     <div
       css={css`
-        width: 230px;
+        width: 300px;
         display: flex;
         flex-direction: column;
-        padding: 0px 20px;
+        padding: 0px;
         background: ${background(ctx)};
         height: 100vh;
       `}
@@ -82,8 +87,8 @@ const SidebarContent = (setIsSideBarOpen) => {
           align-items: stretch;
         `}
       >
-        <SidebarButton onClick={handleNewPiece} text="New Piece" />
-        <SidebarButton onClick={handleLogout} text="Logout" />
+        <SidebarButton onClick={handleNewPiece} text="New Piece" icon={newIcon}/>
+        <SidebarButton onClick={handleLogout} text="Logout" icon={logout}/>
       </div>
     </div>
   );
