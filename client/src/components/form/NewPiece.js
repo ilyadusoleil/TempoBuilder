@@ -9,6 +9,7 @@ import GeneratePlan from './GeneratePlan';
 
 import { SERVER } from '../../constants';
 
+import { text } from '../../colors';
 import PieceForm from './PieceForm';
 
 const NewPiece = () => {
@@ -58,7 +59,13 @@ const NewPiece = () => {
         align-items: center;
       `}
     >
-      <h2>Create New Practice Plan</h2>
+      <h2
+        css={css`
+          color: ${text(ctx)};
+        `}
+      >
+        Create New Practice Plan
+      </h2>
       <form
         css={css`
           display: flex;

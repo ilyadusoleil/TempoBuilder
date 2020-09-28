@@ -7,6 +7,8 @@ import Context from '../../Context';
 import PieceForm from './PieceForm';
 import { updatePiece } from '../../ApiClient';
 
+import { text } from '../../colors';
+
 const EditPiece = () => {
   const ctx = useContext(Context);
   const editPiece = ctx.state.pieces[ctx.state.editIdx];
@@ -57,7 +59,13 @@ const EditPiece = () => {
           setImageArray={setImageArray}
           pieceInfo={editPiece}
         />
-        <div>Plan Details</div>
+        <div
+          css={css`
+            color: ${text(ctx)};
+          `}
+        >
+          Plan Details
+        </div>
         {editPiece.plan.map((day, i) => (
           <div key={i}>
             <div>Day {i + 1}</div>
