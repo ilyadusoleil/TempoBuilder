@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-onchange */
-//TODO remove above eslint
+//TODO: remove above eslint
 import React, { useContext } from 'react';
 import Context from '../../Context';
 

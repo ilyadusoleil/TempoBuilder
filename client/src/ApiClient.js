@@ -45,7 +45,7 @@ function updateCurrentPiece(newCurrentPieceIdx) {
 function updateCurrentDay(pieceId, newCurrentDay) {
   const sending = { id: pieceId, currentDay: newCurrentDay };
   // eslint-disable-next-line no-console
-  console.log('sending (day)', sending); //TODO remove this once bug with updating day with newly created piece is fixed
+  console.log('sending (day)', sending); //TODO: remove this once bug with updating day with newly created piece is fixed
   fetchRequest('/piece/currentDay', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

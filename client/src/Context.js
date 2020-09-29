@@ -45,7 +45,7 @@ const UpdateSession = (state, val) => {
   return newState;
 };
 
-// TODO ensure min < max
+// TODO: ensure min < max
 const LimitMaxMin = (value, min, max) => {
   if (value > max) return max;
   if (value < min) return min;
@@ -142,7 +142,7 @@ const reducer = (state, action) => {
     case 'setUser':
       return Object.assign({}, state, { user: { ...action.payload } });
     case 'setAuthError':
-      return Object.assign({}, state, { authError: action.payload }); //TODO check this isn't an object
+      return Object.assign({}, state, { authError: action.payload }); //TODO: check this isn't an object
     case 'setIsAuthenticated':
       return Object.assign({}, state, { isAuthenticated: action.payload });
     case 'setIsLoggedIn':

@@ -21,7 +21,7 @@ const App = () => {
     currentPiece: 0,
 
     pieces: [
-      // TODO remove reference dummy data below
+      // TODO: remove reference dummy data below
       // {
       //   name: 'Arban 1',
       //   tempoTarget: 108,

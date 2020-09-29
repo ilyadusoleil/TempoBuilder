@@ -65,7 +65,7 @@ const SidebarContent = (setIsSideBarOpen) => {
           }}
           onEdit={() => {
             setIsSideBarOpen(false);
-            ctx.dispatch({ type: 'setDisplayStateEdit', payload: i }); // TODO consider updating payload to _id instead
+            ctx.dispatch({ type: 'setDisplayStateEdit', payload: i }); // TODO: consider updating payload to _id instead
           }}
           onTrash={() => {
             if (confirm(`Are you sure you want to delete ${piece.name}`)) {
@@ -73,7 +73,7 @@ const SidebarContent = (setIsSideBarOpen) => {
               deletePiece(piece._id);
             }
 
-            //TODO if deleting a piece, changes the currentPiece, need to update this index on the server as well.
+            //TODO: if deleting a piece, changes the currentPiece, need to update this index on the server as well.
           }}
         />
       ))}

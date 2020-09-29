@@ -21,7 +21,7 @@ const storage = new CloudinaryStorage({
     public_id: (req, file) => 'computed-filename-using-request',
   },
 
-  // TODO get below properties working
+  // TODO: get below properties working
   // allowedFormats: ['png'],
   // transformation: [{ width: 2500, height: 1000, crop: 'limit' }],
 

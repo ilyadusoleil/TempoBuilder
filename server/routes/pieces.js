@@ -34,7 +34,7 @@ router.put('/', ensureAuth, async (req, res) => {
   }
 });
 
-// TODO change to patch
+// TODO: change to patch
 router.post('/currentPiece', ensureAuth, async (req, res) => {
   try {
     console.log('Update current Piece', req.body, 'id', req.user.id);
@@ -51,7 +51,7 @@ router.post('/currentPiece', ensureAuth, async (req, res) => {
   }
 });
 
-// TODO change to patch
+// TODO: change to patch
 router.post('/currentDay', ensureAuth, async (req, res) => {
   try {
     console.log('Update current Day', req.body, 'id', req.user.id);
@@ -67,7 +67,7 @@ router.post('/currentDay', ensureAuth, async (req, res) => {
   }
 });
 
-// TODO change to patch
+// TODO: change to patch
 router.post('/currentSession', ensureAuth, async (req, res) => {
   try {
     //req.body.id and req.body.(new)CurrentDay
