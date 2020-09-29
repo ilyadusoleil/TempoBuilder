@@ -50,7 +50,7 @@ const LoginPage = () => {
               font-size: 20px;
             `}
           >
-            I need a catchphrase
+            Play with increased precision and speed
           </div>
           <GoogleButton type="dark" onClick={LoginGoogle} />
         </div>
