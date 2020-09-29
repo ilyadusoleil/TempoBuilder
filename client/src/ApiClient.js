@@ -1,7 +1,7 @@
 import {SERVER as BASE_URL} from './constants.js'
 
  function newPiece(newPiece) {
-  fetchRequest('piece', {
+  fetchRequest('/piece', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
