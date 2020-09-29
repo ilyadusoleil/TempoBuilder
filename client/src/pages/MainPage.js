@@ -11,7 +11,7 @@ const MainPage = () => {
   const ctx = useContext(Context);
 
   useEffect(() => {
-    fetch(`${SERVER}/auth/login/success`, {
+    fetch(`/auth/login/success`, {
       method: 'GET',
       credentials: 'include',
       headers: {
