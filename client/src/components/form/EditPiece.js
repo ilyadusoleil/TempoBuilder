@@ -6,7 +6,7 @@ import Context from '../../Context';
 
 import PieceForm from './PieceForm';
 import { updatePiece } from '../../ApiClient';
-
+import { FORM_BUTTON } from './formStyles';
 import { text } from '../../colors';
 
 const EditPiece = () => {
@@ -75,8 +75,38 @@ const EditPiece = () => {
             ))}
           </div>
         ))}
-        <button onClick={onCancel}>Cancel</button>
-        <input type="submit" value="Update" onClick={handleSubmit} />
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 5px;
+          `}
+        >
+          <button
+            css={css`
+            ${FORM_BUTTON(ctx)};
+            margin: 0px;
+            margin-right: 20px;
+            height: 30px;
+            border: none;
+          `}
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+          <input
+            css={css`
+              ${FORM_BUTTON(ctx)};
+              margin: 0px;
+              height: 30px;
+              border: none;
+            `}
+            type="submit"
+            value="Update"
+            onClick={handleSubmit}
+          />
+        </div>
       </form>
     </div>
   );

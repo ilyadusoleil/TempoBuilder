@@ -8,7 +8,7 @@ import Context from '../../Context';
 import GeneratePlan from './GeneratePlan';
 
 import { newPiece as uploadNewPiece } from '../../ApiClient';
-
+import { FORM_BUTTON } from './formStyles';
 import { text } from '../../colors';
 import PieceForm from './PieceForm';
 
@@ -74,8 +74,37 @@ const NewPiece = () => {
           setImageArray={setImageArray}
         />
 
-        <button onClick={onCancel}>Cancel</button>
-        <input type="submit" value="Create" onClick={handleSubmit} />
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          `}
+        >
+          <button
+            css={css`
+              ${FORM_BUTTON(ctx)}
+              margin: 0px;
+              margin-right: 20px;
+              height: 30px;
+              border: none;
+            `}
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+          <input
+            css={css`
+              ${FORM_BUTTON(ctx)}
+              margin: 0px;
+              height: 30px;
+              border: none;
+            `}
+            type="submit"
+            value="Create"
+            onClick={handleSubmit}
+          />
+        </div>
       </form>
     </div>
   );
