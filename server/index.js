@@ -37,13 +37,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // set up cors to allow us to accept requests from our client
-app.use(
-  cors({
-    origin: 'http://tempobuilder.herokuapp.com/', // allow to server to accept request from different origin
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // allow session cookie from browser to pass through
-  })
-);
+// app.use(
+//   cors({
+//     origin: 'http://tempobuilder.herokuapp.com/', // allow to server to accept request from different origin
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     credentials: true, // allow session cookie from browser to pass through
+//   })
+// );
+app.use(cors());
 
 app.use(express.json());
 
