@@ -41,7 +41,7 @@ const SessionsList = () => {
 
   const isNotLastDay = () => {
     const currentDay = GetCurrentDay(ctx);
-    return currentDay >= GetCurrentSessionDetailsList(ctx).length - 1;
+    return currentDay < GetCurrentPiece(ctx).plan.length - 1;
   };
 
   const nextDay = () => {
@@ -67,12 +67,18 @@ const SessionsList = () => {
         `}
       >
         {GetCurrentDay(ctx) > 0 && (
-          <button css={buttonStyling(ctx, 0, 10)} onClick={prevDay}>
+          <button
+            css={buttonStyling(ctx, 0, isNotLastDay() ? 10 : 0)}
+            onClick={prevDay}
+          >
             Previous
           </button>
         )}
         {isNotLastDay() && (
-          <button css={buttonStyling(ctx, 10, 0)} onClick={nextDay}>
+          <button
+            css={buttonStyling(ctx, GetCurrentDay(ctx) > 0 ? 10 : 0, 0)}
+            onClick={nextDay}
+          >
             Next
           </button>
         )}
