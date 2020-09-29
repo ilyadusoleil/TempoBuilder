@@ -69,7 +69,7 @@ const EditPiece = () => {
             <div>Day {i + 1}</div>
             {day.map((session, i) => (
               <div key={i}>
-                Session {i + 1}: Section {session.section + 1}, x
+                Session {i + 1}: {session.section === -1 ? 'Full run' : `Section ${session.section + 1}`}, x
                 {session.repetitions} at {session.percent}%
               </div>
             ))}
