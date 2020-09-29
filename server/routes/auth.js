@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 
-const CLIENT_URL = 'http://localhost:1234/';
+const CLIENT_URL = process.env.CLIENT_URL;
 
 router.get(
   '/google/callback',
