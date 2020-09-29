@@ -9,7 +9,7 @@ const CLIENT_URL = process.env.CLIENT_URL;
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: CLIENT_URL,
+    successRedirect: "/",
     failureRedirect: "/auth/login/failed"
   })
 );
@@ -37,7 +37,7 @@ router.get("/login/failed", (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect(CLIENT_URL);
+  res.redirect("/");
 });
 
 module.exports = router;
