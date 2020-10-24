@@ -15,8 +15,6 @@ require('dotenv').config();
 // dotenv.config({ path: './config/config.env' });
 const env = process.env.NODE_ENV || 'development';
 
-console.log('index', process.env)
-
 require('./config/passport')(passport);
 
 var forceSsl = function (req, res, next) {
@@ -26,13 +24,14 @@ var forceSsl = function (req, res, next) {
   return next();
 };
 
-if (env === 'production') {
-  app.use(forceSsl);
-}
 
 connectDB();
 
 const app = express();
+
+if (env === 'production') {
+  app.use(forceSsl);
+}
 
 if (env === 'development') {
   app.use(morgan('dev'));
