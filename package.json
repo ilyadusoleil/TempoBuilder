@@ -1,0 +1,25 @@
+{
+  "name": "tempobuilder",
+  "version": "1.0.0",
+  "description": "TempoBuilder is a desktop app to help you manage the practicing of musical etudes",
+  "main": "server/index.js",
+  "scripts": {
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "build:client": "cd client && npm run build",
+    "start": "node server/index.js",
+    "heroku-prebuild": "cd client && npm i --only=dev",
+    "heroku-postbuild": "npm run install:client && npm run install:server && npm run build:client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilyadusoleil/TempoBuilder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilyadusoleil/TempoBuilder/issues"
+  },
+  "homepage": "https://github.com/ilyadusoleil/TempoBuilder#readme"
+}

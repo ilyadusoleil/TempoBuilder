@@ -8,21 +8,37 @@ const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 const connectDB = require('./config/db');
 const path = require('path');
+const env = process.env.NODE_ENV || 'development';
 
 //load config
 dotenv.config({ path: './config/config.env' });
 
 require('./config/passport')(passport);
 
+
+
+var forceSsl = function (req, res, next) {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  return next();
+};
+
+if (env === 'production') {
+  app.use(forceSsl);
+}
+
 connectDB();
 
 const app = express();
 
-if (process.env.NODE_ENV === 'development') {
+if (env === 'development') {
   app.use(morgan('dev'));
 }
 
-app.use(express.static(path.join(__dirname, 'build')));
+if (env === 'production') {
+  app.use(express.static(path.join(__dirname, 'build')));
+}
 
 app.use(
   session({
