@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
@@ -8,14 +8,16 @@ const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 const connectDB = require('./config/db');
 const path = require('path');
-const env = process.env.NODE_ENV || 'development';
+
+require('dotenv').config();
 
 //load config
-dotenv.config({ path: './config/config.env' });
+// dotenv.config({ path: './config/config.env' });
+const env = process.env.NODE_ENV || 'development';
+
+console.log('index', process.env)
 
 require('./config/passport')(passport);
-
-
 
 var forceSsl = function (req, res, next) {
   if (req.headers['x-forwarded-proto'] !== 'https') {
