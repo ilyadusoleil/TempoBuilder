@@ -65,9 +65,6 @@ const Metronome = () => {
   };
 
   const start = () => {
-    // if (!audioContext) {
-    //   audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    // }
     currentBeat = 0;
     timerWorker.postMessage({
       action: 'START',

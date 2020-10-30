@@ -4,6 +4,12 @@ TempoBuilder is a desktop app to help you manage the practicing of musical etude
 
 ## Demo
 
+<div>
+  <img src="./Screenshot-1.png" width=400px>
+  <img src="./Screenshot-3.png" width=400px>
+  <img src="./Screenshot-2.png" width=400px>
+</div>
+
 Try it out here: https://tempobuilder.heroku.com/
 
 ## Getting Started
